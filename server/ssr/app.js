@@ -135,7 +135,7 @@ exports.default = App;
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"app":"App__app__tFBwD"};
+module.exports = {"app":"App__app__1T_ie"};
 
 /***/ }),
 
