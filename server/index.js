@@ -1,33 +1,26 @@
 import config from './config'
+import usersRoutes from './routes/users.routes'
 import Express from 'express'
+import mongoose from 'mongoose'
+import dummyUsers from './dummyUsers'
 
 const app = Express()
+
 
 if (process.env.env === 'development' && process.env.side === 'client') {
     require('../config/server')(app)
 } else {
     // ssr
-    const React = require('react')
-    const ReactDOMServer = require('react-dom/server')
-    const App = require('./ssr/app').default
-    const Admin = require('./ssr/admin').default
-    const manifest = require('../dist/client/manifest')
-    const path = require('path')
-    const SSRTemplate = require('./SSRtemplate').default
-
-    app.use(Express.static(path.resolve(__dirname, '../dist/client')))
-
-    app.get('/', SSRTemplate(
-        ReactDOMServer.renderToString(<App/>),
-        [manifest['app.css']],
-        [manifest['vendor.js'], manifest['app.js']]
-    ))
-
-    app.get('/admin', SSRTemplate(
-        ReactDOMServer.renderToString(<Admin/>),
-        [manifest['admin.css']],
-        [manifest['vendor.js'], manifest['admin.js']]
-    ))
+    dummyUsers()
+    require('./serverSSR').default(app)    
 }
+
+app.use('/api', usersRoutes)
+
+mongoose.connect(config.mongoURL, (error) => {
+    if (error) {
+        console.error('Please make sure Mongodb is installed and running! ' + error) // eslint-disable-line no-console
+    }
+})
 
 app.listen(config.port)
