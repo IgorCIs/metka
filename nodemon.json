@@ -1,0 +1,19 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "server/ssr/*"
+  ],
+  "verbose": true,
+  "execMap": {
+    "js": "babel-node"
+  },
+  "watch": [
+    "server"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js,json"
+}

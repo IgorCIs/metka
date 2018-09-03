@@ -1,0 +1,7 @@
+exports.provideMiddleware = require('./provideMiddleware')
+exports.getAddonsModules = require('./getAddonsModules')
+exports.getEnvConfig = require('./getEnvConfig')
+exports.clientDevEntriesByPages = require('./clientDevEntriesByPages')
+exports.HTMLWebpackPluginsByPages = require('./HTMLWebpackPluginsByPages')
+exports.clientBuildEntriesByPages = require('./clientBuildEntriesByPages')
+exports.serverSSRComponentsByPages = require('./serverSSRComponentsByPages')
