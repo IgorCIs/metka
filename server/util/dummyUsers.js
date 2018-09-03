@@ -1,4 +1,4 @@
-import User from './models/users'
+import User from '../models/users'
 
 export default function () {
     User.count().exec((err, count) => {
@@ -18,7 +18,7 @@ export default function () {
                 company: 'Company number ' + i,
                 tels: ['093105382' + i, '093105382' + i],
                 comment: 'text ' + i,
-                _id: '' + i
+                _id: i + 'zdast'
             }))
         }
 
