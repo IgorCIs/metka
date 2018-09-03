@@ -5,6 +5,7 @@
 
 # production
 /dist
+/server/ssr
 
 # misc
 .DS_Store
