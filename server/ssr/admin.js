@@ -135,7 +135,7 @@ exports.default = Admin;
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
-module.exports = {"app":"Admin__app__2th_M"};
+module.exports = {"app":"Admin__app__1Plst"};
 
 /***/ }),
 
