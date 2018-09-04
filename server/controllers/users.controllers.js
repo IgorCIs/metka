@@ -1,15 +1,16 @@
 import User from '../models/users'
 
 export function getUsers(req, res) {
-    const { sort = 'fullname', page = 1, count = 10 } = req.query
+    const {page: sendedPage = 1, count = 10 } = req.query,
+        page = sendedPage - 1
 
-    User.find().sort(`-${ sort || 'fullname'}`).exec((err, users) => {
+    User.find().exec((err, users) => {
         err && res.status(500).send(err)
 
         const usersOnPage = users.slice(page * count, page * count + count)
         const pages = Math.ceil(users.length  / 10)
 
-        res.json({ users: usersOnPage, page, pages })
+        res.json({ users: usersOnPage, page: sendedPage, pages })
     })
 }
 

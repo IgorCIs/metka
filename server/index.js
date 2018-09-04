@@ -20,7 +20,7 @@ app.use('/api', usersRoutes)
 
 mongoose.connect(config.mongoURL, (error) => {
     if (error) {
-        console.error('Please make sure Mongodb is installed and running! ' + error) 
+        console.error('MongoDB not running, error: ' + error) 
     }
 })
 
