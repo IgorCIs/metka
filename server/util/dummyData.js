@@ -1,4 +1,5 @@
 import User from '../models/users'
+import Admin from '../models/admins'
 
 export default function () {
     User.count().exec((err, count) => {
@@ -43,13 +44,28 @@ export default function () {
 
         User.create(posts, (error) => {
             if (!error) {
-                console.log('ready to go....')
+                console.log('DummyUsers created!')
             } else {
                 console.log(error)
             }
         })
+    })
+    
+    Admin.count().exec((err, count) => {
+        if (count >= 1) return
+        
+        const admin = new Admin({
+            login: 'superigor',
+            password: 'igormegakrut'
+        })
 
-        console.log(count + ' dummy post available!')
+        Admin.create(admin, (error) => {
+            if (!error) {
+                console.log('DummyAdmin created!')
+            } else {
+                console.log(error)
+            }
+        })
     })
 }
 
