@@ -6,21 +6,27 @@ import manifest  from '../dist/client/manifest'
 import path  from 'path'
 import Express from 'express'
 import SSRTemplate  from './SSRtemplate'
+import { getUsers } from './controllers/users.controllers'
 
 const middleware = app => {
     app.use(Express.static(path.resolve(__dirname, '../dist/client')))
 
-    app.get('/', SSRTemplate(
-        ReactDOMServer.renderToString(<App/>),
-        [manifest['app.css']],
-        [manifest['vendor.js'], manifest['app.js']]
-    ))
+    app.get('/', (req, res) => {
+        res.send(SSRTemplate(
+            ReactDOMServer.renderToString(<App/>),
+            [manifest['app.css']],
+            [manifest['vendor.js'], manifest['app.js']]
+        ))
+    })
 
-    app.get('/admin', SSRTemplate(
-        ReactDOMServer.renderToString(<Admin/>),
-        [manifest['admin.css']],
-        [manifest['vendor.js'], manifest['admin.js']]
-    ))
+    app.get('/admin', (req, res) => getUsers().then(initialState => {
+        res.send(SSRTemplate(
+            ReactDOMServer.renderToString(<Admin/>),
+            [manifest['admin.css']],
+            [manifest['vendor.js'], manifest['admin.js']],
+            initialState
+        ))
+    }))
 }
 
 export default middleware

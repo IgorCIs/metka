@@ -1,18 +1,27 @@
 import User from '../models/users'
 
 export function getUsers(req, res) {
-    const {page: sendedPage = 1, count = 10 } = req.query,
-        page = sendedPage - 1
+    let { page: sendedPage = 1, count = 30 } = req.query
+    sendedPage = +sendedPage
+    count = +count
+    
+    const page = sendedPage - 1
 
-    User.find().exec((err, users) => {
+    return new Promise(resolve => User.find().exec((err, users) => {
         if(err) res.status(500).send(err)
         else {
             const usersOnPage = users.slice(page * count, page * count + count)
-            const pages = Math.ceil(users.length  / 10)
+            const pages = Math.ceil(users.length / count)
+            const result = { users: usersOnPage, page: sendedPage, pages }
             
-            res.json({ users: usersOnPage, page: sendedPage, pages })
+            try {
+                res.json(result)
+            }
+            catch (e) {
+                resolve(result)
+            }
         }
-    })
+    }))
 }
 
 export function getUsersById(req, res) {
@@ -53,9 +62,7 @@ export function updateUser(req, res) {
             user.save((err, saved) => {
                 if(err) res.status(500).send(err)    
                 else res.json({ post: saved })
-        
             })
         }
-
     })
 }

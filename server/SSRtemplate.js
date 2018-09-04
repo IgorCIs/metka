@@ -1,5 +1,4 @@
-export default (html = '', styles = [], scripts = []) => (req, res) => {
-    res.send(`
+export default (html = '', styles = [], scripts = [], initialState) => `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -9,8 +8,12 @@ export default (html = '', styles = [], scripts = []) => (req, res) => {
         </head>
         <body>
             <div id="root">${html}</div>
+            ${initialState ? `
+                <script>
+                    window.INITIAL_STATE = ${initialState}
+                </script>
+            ` : ''}
             ${scripts.map(scriptURI => `<script src="${scriptURI}"></script>`).join('\n')}
         </body>
         </html>
-    `)
-}
+    `
