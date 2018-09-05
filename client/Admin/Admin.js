@@ -1,9 +1,11 @@
 import React from 'react'
-import styles from './Admin.scss'
+
+import Main from './scenes/Main'
 
 const Admin = () => (
-    <div className={styles.app}>
+    <div>
         <h1>Admin</h1>
+        <Main/>
     </div>
 )
 
