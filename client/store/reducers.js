@@ -43,7 +43,7 @@ export const pages = (state = 1, action) => {
     }
 }
 
-export const sort = (state = 'fullname', action) => {
+export const sort = (state = '+fullname', action) => {
     switch (action.type) {
     case c.CHANGE_SORT_KEY:
         return action.sort

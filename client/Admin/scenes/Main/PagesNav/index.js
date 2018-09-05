@@ -10,10 +10,10 @@ const arrFromLength = (length = 0, index = 0) => length > 0 ? [
     ...arrFromLength(length - 1, index + 1)
 ] : []
 
-const PagesNav = ({currentPage = 1, pageCount = 1, onClick = () => {}}) => (
+const PagesNav = ({currentPage = 1, pageCount = 1, sortKey = '+fullname', onClick = () => {}}) => (
     <div className={styles.wrapper}>
         {arrFromLength(pageCount, 1).map(page =>
-            <div key={page} onClick={onClick.bind(null, page)} className={`${styles.page} ${currentPage === page ? styles.active : ''}`}>
+            <div key={page} onClick={onClick.bind(null, page, sortKey)} className={`${styles.page} ${currentPage === page ? styles.active : ''}`}>
                 {page}
             </div>)
         }
@@ -23,17 +23,19 @@ const PagesNav = ({currentPage = 1, pageCount = 1, onClick = () => {}}) => (
 PagesNav.propTypes = {
     currentPage: PropTypes.number,
     pageCount: PropTypes.number,
+    sortKey: PropTypes.string,
     onClick: PropTypes.func
 }
 
 const stateToProps = store => ({
     currentPage: store.page,
-    pageCount: store.pages
+    pageCount: store.pages,
+    sortKey: store.sort
 })
 
 const dispatchToProps = dispatch => ({
-    onClick(page) {
-        axios(`/api/users?page=${page}`).then(res => {
+    onClick(page, sortKey) {
+        axios(`/api/users?page=${page}&sort=${sortKey}`).then(res => {
             const { page, users } = res.data
 
             dispatch(setPage(page, users))

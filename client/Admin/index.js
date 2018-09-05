@@ -16,7 +16,7 @@ if (process.env.side === 'client' && process.env.env === 'development') {
     axios.get('api/users').then(res => {
         console.log(res)
 
-        const { users = [], pages = 1, page = 1, sort = 'fullname' } = res.data
+        const { users = [], pages = 1, page = 1, sort = '+fullname' } = res.data
 
         renderWithStore(storeFactory({users, pages, page, sort}))
     })

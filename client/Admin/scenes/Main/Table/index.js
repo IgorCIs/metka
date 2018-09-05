@@ -14,8 +14,6 @@ const stateToProps = state => ({
 const dispatchToProps = dispatch => ({
     sortBy(key, page) {
         axios(`api/users?sort=${key}&page=${page}`).then(res => {
-            console.log(key, page, res)
-
             dispatch(sortBy(key, res.data.users))
         })
     }
@@ -26,10 +24,10 @@ const Table = ({ users = [], currentPage = 1, sortBy = () =>{} }) => (
         <thead>
             <tr>
                 <td>№</td>
-                <td onClick={sortBy.bind(null, 'fullname', currentPage)} className={styles.thead}>
+                <td onClick={sortBy.bind(null, '+fullname', currentPage)} className={styles.thead}>
                     ФИО
                 </td>
-                <td onClick={sortBy.bind(null, '_id', currentPage)} className={styles.thead}>
+                <td onClick={sortBy.bind(null, '+_id', currentPage)} className={styles.thead}>
                     Код
                 </td>
                 <td>Вход</td>
