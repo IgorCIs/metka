@@ -12,7 +12,7 @@ export function getUsers(req, res) {
         else {
             const usersOnPage = users.slice(page * count, page * count + count)
             const pages = Math.ceil(users.length / count)
-            const result = { users: usersOnPage, page: sendedPage, pages }
+            const result = { users: usersOnPage, page: sendedPage, pages, sort }
             
             try {
                 res.json(result)
