@@ -10,7 +10,7 @@ export default (html = '', styles = [], scripts = [], initialState) => `
             <div id="root">${html}</div>
             ${initialState ? `
                 <script>
-                    window.INITIAL_STATE = ${initialState}
+                    window.__INITIAL_STATE__ = ${initialState}
                 </script>
             ` : ''}
             ${scripts.map(scriptURI => `<script src="${scriptURI}"></script>`).join('\n')}

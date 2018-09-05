@@ -5,10 +5,10 @@ import Express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 
-//auth 
-// import passport from 'passport'
-// import session from 'express-session'
-// const RedisStore = require('connect-redis')(session)
+// auth 
+import passport from 'passport'
+import session from 'express-session'
+const RedisStore = require('connect-redis')(session)
 
 mongoose.Promise = global.Promise
 
@@ -16,6 +16,19 @@ const app = Express()
 
 app.use(bodyParser.json({ limit: '20mb' }))
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }))
+
+app.use(session({
+    store: new RedisStore({
+        url: config.redisStore.url
+    }),
+    secret: config.redisStore.secret,
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 
 if (process.env.env === 'development' && process.env.side === 'client') {
     require('../config/server')(app)

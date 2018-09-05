@@ -7,6 +7,8 @@ import path  from 'path'
 import Express from 'express'
 import SSRTemplate  from './SSRtemplate'
 import { getUsers } from './controllers/users.controllers'
+import { Provider } from 'react-redux'
+import storeFactory from '../client/store'
 
 const middleware = app => {
     app.use(Express.static(path.resolve(__dirname, '../dist/client')))
@@ -19,12 +21,16 @@ const middleware = app => {
         ))
     })
 
-    app.get('/admin', (req, res) => getUsers().then(initialState => {
+    app.get('/admin', (req, res) => getUsers({ query: {} }).then(initialState => {
         res.send(SSRTemplate(
-            ReactDOMServer.renderToString(<Admin/>),
+            ReactDOMServer.renderToString(
+                <Provider store={storeFactory(initialState)}>
+                    <Admin/>
+                </Provider>
+            ),
             [manifest['admin.css']],
             [manifest['vendor.js'], manifest['admin.js']],
-            initialState
+            JSON.stringify(initialState)
         ))
     }))
 }

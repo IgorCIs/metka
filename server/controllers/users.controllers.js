@@ -1,11 +1,11 @@
 import User from '../models/users'
 
 export function getUsers(req, res) {
-    let { page: sendedPage = 1, count = 30 } = req.query
-    sendedPage = +sendedPage
-    count = +count
-    
-    const page = sendedPage - 1
+    let { page = 1, count = 30 } = req.query,
+        sendedPage = Number(page)
+        
+    count = Number(count)
+    page = page - 1
 
     return new Promise(resolve => User.find().exec((err, users) => {
         if(err) res.status(500).send(err)
@@ -16,8 +16,7 @@ export function getUsers(req, res) {
             
             try {
                 res.json(result)
-            }
-            catch (e) {
+            } catch (e) {
                 resolve(result)
             }
         }
@@ -26,7 +25,7 @@ export function getUsers(req, res) {
 
 export function getUsersById(req, res) {
     User.findById(req.params.id).exec((err, users) => {
-        if(err)  res.status(500).send(err)
+        if(err) res.status(500).send(err)
         else {
             res.json({ users })
         }
@@ -54,7 +53,7 @@ export function updateUser(req, res) {
     if(!params.id || !body)  res.status(403).end()
     
     User.findById(params.id, (err, user) => {
-        if(err) err && res.status(500).send(err)
+        if(err) res.status(500).send(err)
         else if(!user) res.status(500).json({message: 'No user width this id', id: req.params.id}) 
         else {
             user.set({ ...user, ...body})
