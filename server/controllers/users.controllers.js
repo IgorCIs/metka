@@ -1,13 +1,13 @@
 import User from '../models/users'
 
 export function getUsers(req, res) {
-    let { page = 1, count = 30 } = req.query,
+    let { page = 1, count = 30, sort = 'fullname' } = req.query,
         sendedPage = Number(page)
         
     count = Number(count)
     page = page - 1
 
-    return new Promise(resolve => User.find().exec((err, users) => {
+    return new Promise(resolve => User.find().sort(`-${sort}`).exec((err, users) => {
         if(err) res.status(500).send(err)
         else {
             const usersOnPage = users.slice(page * count, page * count + count)
