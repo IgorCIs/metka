@@ -17,3 +17,9 @@ export const setPages = (pages, users) => ({
     pages,
     users
 })
+
+export const sortBy = (sort, users) => ({
+    type: c.CHANGE_SORT_KEY,
+    sort,
+    users
+})

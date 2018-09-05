@@ -1,18 +1,37 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import styles from './Table.scss'
+import axios from  'axios'
+import { sortBy } from '../../../../store/actions'
 
 const stateToProps = state => ({
-    users: state.users
+    users: state.users,
+    currentPage: state.page,
+    sortKey: state.sort
 })
 
-const Table = ({ users = [] }) => (
-    <table style={{width: '100%', border: '1px solid'}}>
-        <thead style={{fontWeight: '700'}}>
+const dispatchToProps = dispatch => ({
+    sortBy(key, page) {
+        axios(`api/users?sort=${key}&page=${page}`).then(res => {
+            console.log(key, page, res)
+
+            dispatch(sortBy(key, res.data.users))
+        })
+    }
+})
+
+const Table = ({ users = [], currentPage = 1, sortBy = () =>{} }) => (
+    <table className={styles.table}>
+        <thead>
             <tr>
                 <td>№</td>
-                <td>ФИО</td>
-                <td>Код</td>
+                <td onClick={sortBy.bind(null, 'fullname', currentPage)} className={styles.thead}>
+                    ФИО
+                </td>
+                <td onClick={sortBy.bind(null, '_id', currentPage)} className={styles.thead}>
+                    Код
+                </td>
                 <td>Вход</td>
                 <td>Тип</td>
                 <td>Дата захода</td>
@@ -22,7 +41,7 @@ const Table = ({ users = [] }) => (
         <tbody>
             {users.map((user, i) => (
                 <tr key={user._id}>
-                    <td>{i}</td>
+                    <td>{(i + 1) + (currentPage - 1) * 30}</td>
                     <td>{user.fullname}</td>
                     <td>{user._id}</td>
                     <td>none</td>
@@ -36,7 +55,10 @@ const Table = ({ users = [] }) => (
 )
 
 Table.propTypes = {
-    users: PropTypes.array
+    users: PropTypes.array,
+    currentPage: PropTypes.number,
+    sortKey: PropTypes.string,
+    sortBy: PropTypes.func
 }
 
-export default connect(stateToProps, null)(Table)
+export default connect(stateToProps, dispatchToProps)(Table)

@@ -1,0 +1,19 @@
+.table {
+  width: 100%;
+  border: 1px solid;
+  thead {
+    font-weight: 700;
+  }
+  tbody {
+    tr:nth-child(2n) {
+      background-color: grey;
+    }
+  }
+}
+
+.thead {
+  cursor: pointer;
+  &:hover, &.active {
+    color: cornflowerblue;
+  }
+}

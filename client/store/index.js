@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux'
-import { users, page, pages } from './reducers'
+import { users, page, pages, sort } from './reducers'
 // import axios from 'axios'
 
 // const server = store => next => action => {
@@ -16,7 +16,8 @@ import { users, page, pages } from './reducers'
 const storeFactory = initialState => createStore(combineReducers({
     users,
     page,
-    pages
+    pages,
+    sort
 }), initialState)
 
 export default storeFactory
