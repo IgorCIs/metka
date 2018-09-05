@@ -9,7 +9,13 @@ const userChema = new Schema({
     company: {type: 'String' },
     tels: [{type: 'String' }],
     comment: {type: 'String' },
-    _id: {type: 'String'}
+    _id: { type: 'String' },
+    tests: [
+        {
+            answer: { type: 'String' },
+            attemptСount: { type: 'Number' }
+        }
+    ]
 })
 
 export default mongoose.model('Users', userChema)

@@ -1,23 +1,35 @@
 import User from '../models/users'
 
 export function getUsers(req, res) {
-    const { sort = 'fullname', page = 1, count = 10 } = req.query
+    let { page: sendedPage = 1, count = 30 } = req.query
+    sendedPage = +sendedPage
+    count = +count
+    
+    const page = sendedPage - 1
 
-    User.find().sort(`-${ sort || 'fullname'}`).exec((err, users) => {
-        err && res.status(500).send(err)
-
-        const usersOnPage = users.slice(page * count, page * count + count)
-        const pages = Math.ceil(users.length  / 10)
-
-        res.json({ users: usersOnPage, page, pages })
-    })
+    return new Promise(resolve => User.find().exec((err, users) => {
+        if(err) res.status(500).send(err)
+        else {
+            const usersOnPage = users.slice(page * count, page * count + count)
+            const pages = Math.ceil(users.length / count)
+            const result = { users: usersOnPage, page: sendedPage, pages }
+            
+            try {
+                res.json(result)
+            }
+            catch (e) {
+                resolve(result)
+            }
+        }
+    }))
 }
 
 export function getUsersById(req, res) {
     User.findById(req.params.id).exec((err, users) => {
-        err && res.status(500).send(err)
-
-        res.json({ users })
+        if(err)  res.status(500).send(err)
+        else {
+            res.json({ users })
+        }
     })
 }
 
@@ -28,25 +40,29 @@ export function addUser(req, res) {
         const newUser = new User({_id: id})
         
         newUser.save((err, saved) => {
-            err && res.status(500).send(err)
-            
-            res.json({ post: saved })
+            if(err) res.status(500).send(err)
+            else {
+                res.json({ post: saved })
+            }
         })
     }
 }
 
 export function updateUser(req, res) {
-    !req.params.id && !req.body && res.status(403).end()
+    const { params, body } = req
     
-    User.findById(req.params.id, (err, user) => {
-        err && res.status(500).send(err)
-
-        user.set({ ...req.body })
-
-        user.save((err, saved) => {
-            err && res.status(500).send(err)
-
-            res.json({ post: saved })
-        })
+    if(!params.id || !body)  res.status(403).end()
+    
+    User.findById(params.id, (err, user) => {
+        if(err) err && res.status(500).send(err)
+        else if(!user) res.status(500).json({message: 'No user width this id', id: req.params.id}) 
+        else {
+            user.set({ ...user, ...body})
+            
+            user.save((err, saved) => {
+                if(err) res.status(500).send(err)    
+                else res.json({ post: saved })
+            })
+        }
     })
 }
