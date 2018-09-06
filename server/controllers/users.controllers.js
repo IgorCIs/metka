@@ -24,10 +24,10 @@ export function getUsers(req, res) {
 }
 
 export function getUsersById(req, res) {
-    User.findById(req.params.id).exec((err, users) => {
+    User.findById(req.params.id).exec((err, user) => {
         if(err) res.status(500).send(err)
         else {
-            res.json({ users })
+            res.json({ user })
         }
     })
 }

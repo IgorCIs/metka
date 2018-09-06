@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import styles from './Table.scss'
 import axios from  'axios'
 import { sortBy } from '../../../../store/actions'
+import { Link } from 'react-router-dom'
 
 const stateToProps = state => ({
     users: state.users,
@@ -40,7 +41,11 @@ const Table = ({ users = [], currentPage = 1, sortBy = () =>{} }) => (
             {users.map((user, i) => (
                 <tr key={user._id}>
                     <td>{(i + 1) + (currentPage - 1) * 30}</td>
-                    <td>{user.fullname}</td>
+                    <td>
+                        <Link to={`/admin/${user._id}`}>
+                            {user.fullname}
+                        </Link>
+                    </td>
                     <td>{user._id}</td>
                     <td>none</td>
                     <td>none</td>
