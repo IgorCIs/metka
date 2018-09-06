@@ -1,17 +1,15 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Main from './scenes/Main'
 import User from './scenes/User'
+import { Route } from 'react-router-dom'
 
 const Admin = () => (
-    <Router>
-        <div>
-            <h1>Admin</h1>
+    <div>
+        <h1>Admin</h1>
 
-            <Route exact path="/admin" component={Main}/>
-            <Route path="/admin/:id" component={User} />
-        </div>
-    </Router>
+        <Route exact path="/admin" component={Main}/>
+        <Route path="/admin/:id" component={User} />
+    </div>
 )
 
 export default Admin

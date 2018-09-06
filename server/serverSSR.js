@@ -9,6 +9,7 @@ import SSRTemplate  from './SSRtemplate'
 import { getUsers } from './controllers/users.controllers'
 import { Provider } from 'react-redux'
 import storeFactory from '../client/store'
+import { StaticRouter } from 'react-router-dom'
 
 const middleware = app => {
     app.use(Express.static(path.resolve(__dirname, '../dist/client')))
@@ -25,7 +26,9 @@ const middleware = app => {
         res.send(SSRTemplate(
             ReactDOMServer.renderToString(
                 <Provider store={storeFactory(initialState)}>
-                    <Admin/>
+                    <StaticRouter location="/admin" context={{}}>
+                        <Admin/>
+                    </StaticRouter>
                 </Provider>
             ),
             [manifest['admin.css']],
