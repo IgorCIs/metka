@@ -15,7 +15,7 @@ const stateToProps = state => ({
 const dispatchToProps = dispatch => ({
     sortBy(key, page) {
         axios(`api/users?sort=${key}&page=${page}`).then(res => {
-            dispatch(sortBy(key, res.data.users))
+            dispatch(sortBy(key, res.data.user))
         })
     }
 })
