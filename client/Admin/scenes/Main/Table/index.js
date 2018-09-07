@@ -2,9 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from './Table.scss'
-import axios from  'axios'
-import { sortBy } from '../../../../store/actions'
 import { Link } from 'react-router-dom'
+import SortingField from './SortingField'
 
 const stateToProps = state => ({
     users: state.users,
@@ -12,25 +11,13 @@ const stateToProps = state => ({
     sortKey: state.sort
 })
 
-const dispatchToProps = dispatch => ({
-    sortBy(key, page) {
-        axios(`api/users?sort=${key}&page=${page}`).then(res => {
-            dispatch(sortBy(key, res.data.user))
-        })
-    }
-})
-
-const Table = ({ users = [], currentPage = 1, sortBy = () =>{} }) => (
+const Table = ({ users = [], currentPage = 1 }) => (
     <table className={styles.table}>
         <thead>
             <tr>
                 <td>№</td>
-                <td onClick={sortBy.bind(null, '+fullname', currentPage)} className={styles.thead}>
-                    ФИО
-                </td>
-                <td onClick={sortBy.bind(null, '+_id', currentPage)} className={styles.thead}>
-                    Код
-                </td>
+                <SortingField sortBy={'fullname'}>ФИО</SortingField>
+                <SortingField sortBy={'_id'}>Код</SortingField>
                 <td>Вход</td>
                 <td>Тип</td>
                 <td>Дата захода</td>
@@ -41,12 +28,12 @@ const Table = ({ users = [], currentPage = 1, sortBy = () =>{} }) => (
             {users.map((user, i) => (
                 <tr key={user._id}>
                     <td>{(i + 1) + (currentPage - 1) * 30}</td>
+                    <td>{user.fullname}</td>
                     <td>
-                        <Link to={`/admin/${user._id}`}>
-                            {user.fullname}
+                        <Link to={`admin/${user._id}`}>
+                            {user._id}
                         </Link>
                     </td>
-                    <td>{user._id}</td>
                     <td>none</td>
                     <td>none</td>
                     <td>none</td>
@@ -60,8 +47,6 @@ const Table = ({ users = [], currentPage = 1, sortBy = () =>{} }) => (
 Table.propTypes = {
     users: PropTypes.array,
     currentPage: PropTypes.number,
-    sortKey: PropTypes.string,
-    sortBy: PropTypes.func
 }
 
-export default connect(stateToProps, dispatchToProps)(Table)
+export default connect(stateToProps, null)(Table)
