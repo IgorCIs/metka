@@ -39,7 +39,7 @@ const middleware = app => {
     }))
 
     
-    app.use('/login', (req, res) => {
+    app.use('/login', (req, res) => 
         res.send(SSRTemplate(
             ReactDOMServer.renderToString(
                 <form> 
@@ -53,7 +53,7 @@ const middleware = app => {
                 </form>
             )
         ))
-    } )    
+    )    
 }
 
 export default middleware

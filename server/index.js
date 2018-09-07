@@ -24,7 +24,7 @@ app.use(session({
     saveUninitialized: true
 }))
 
-import autorizeMiddleware from './middleware/autorize.middleware'
+import autorizeMiddleware from './middleware/authorize.middleware'
 
 //authMidleware
 const protectedPages = [
@@ -53,4 +53,4 @@ mongoose.connect(config.mongoURL, (error) => {
     }
 })
 
-app.listen(config.port)
+app.listen(config.port) 
