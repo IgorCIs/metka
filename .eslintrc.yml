@@ -27,3 +27,10 @@ rules:
     - error
     - never
   no-console: 0
+  react/prop-types:
+    - 2
+    -
+      ignore:
+        - children
+
+#  [<enabled>, { ignore: <ignore>, customValidators: <customValidator> }]

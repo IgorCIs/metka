@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Form from './Form'
 
 const User = ({ users = [], match }) => {
     const user = users.filter(({ _id }) => _id === match.params.id)[0]
 
     return user ? (
         <div>
-            <h3>{user._id}</h3>
+            <h3>Код: {user._id}</h3>
+            <Form user={user}/>
         </div>
     ) : (
         <div style={{color: 'red'}}>
