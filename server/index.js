@@ -5,10 +5,9 @@ import Express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 
-// auth 
-import passport from 'passport'
+import cookieParser from 'cookie-parser'
 import session from 'express-session'
-const RedisStore = require('connect-redis')(session)
+const MongoStore = require('connect-mongo')(session)
 
 mongoose.Promise = global.Promise
 
@@ -17,18 +16,22 @@ const app = Express()
 app.use(bodyParser.json({ limit: '20mb' }))
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }))
 
+app.use(cookieParser())
 app.use(session({
-    store: new RedisStore({
-        url: config.redisStore.url
-    }),
-    secret: config.redisStore.secret,
-    resave: false,
-    saveUninitialized: false
+    secret: config.redis.secret,
+    store: new MongoStore({ url: config.redis.url }),
+    resave: true,
+    saveUninitialized: true
 }))
-app.use(passport.initialize())
-app.use(passport.session())
 
+import autorizeMiddleware from './middleware/autorize.middleware'
 
+//authMidleware
+const protectedPages = [
+    '/admin$', '/admin/'
+]
+
+app.use('/', autorizeMiddleware(protectedPages))
 
 if (process.env.env === 'development' && process.env.side === 'client') {
     require('../config/server')(app)
@@ -42,6 +45,7 @@ process.env.env === 'development' && require('./util/dummyData').default()
 //api
 app.use('/api', usersRoutes)
 app.use('/api', adminsRoutes)
+
 
 mongoose.connect(config.mongoURL, (error) => {
     if (error) {

@@ -22,7 +22,8 @@ const middleware = app => {
         ))
     })
 
-    app.get('/admin', (req, res) => getUsers({ query: {} }).then(initialState => {
+
+    app.get(['/admin', '/admin/*'], (req, res) => getUsers({ query: {} }).then(initialState => {
         res.send(SSRTemplate(
             ReactDOMServer.renderToString(
                 <Provider store={storeFactory(initialState)}>
@@ -36,6 +37,23 @@ const middleware = app => {
             JSON.stringify(initialState)
         ))
     }))
+
+    
+    app.use('/login', (req, res) => {
+        res.send(SSRTemplate(
+            ReactDOMServer.renderToString(
+                <form> 
+                    <input vaue='login'/> 
+                    <br/>
+                    <br/>
+                    <input vaue='password'/>
+                    <br/>
+                    <br/>
+                    <button type='submit'> ЛОГИН </button>
+                </form>
+            )
+        ))
+    } )    
 }
 
 export default middleware
