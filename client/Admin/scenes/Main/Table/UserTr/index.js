@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const UserTr = ({ user = {}, index = 1, page = 1 }) => (
+const UserTr = ({ user = {}, index = 1, page = 1, count }) => (
     <tr>
-        <th>{(index + 1) + (page - 1) * 30}</th>
+        <th>{(index + 1) + (page - 1) * count}</th>
         <td>{user.fullname}</td>
         <td>
-            <Link to={`admin/${user._id}`}>
+            <Link to={`/admin/user/${user._id}`}>
                 {user._id}
             </Link>
         </td>
@@ -20,6 +20,7 @@ const UserTr = ({ user = {}, index = 1, page = 1 }) => (
 
 UserTr.propTypes = {
     user: PropTypes.object.isRequired,
+    count: PropTypes.number,
     index: PropTypes.number,
     page: PropTypes.number
 }

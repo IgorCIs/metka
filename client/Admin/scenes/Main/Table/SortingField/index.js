@@ -1,19 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import { sortBy } from '../../../../../store/actions'
 import styles from './SortingField.scss'
 
-const Sorting = ({ children, sortBy, currentSort, currentPage, sort }) => {
-    const current = currentSort.search(new RegExp(sortBy)) !== -1
-    const sign = current ? currentSort.replace(sortBy, '') : 'no-sign'
+const Sorting = ({ children, sortBy, sort, currentSort }) => {
+    const current = currentSort.key === sortBy
+    const sign = current ? currentSort.sign : 'no-sign'
 
     const click = () => {
         const newSign = sign === '+' ? '-' : '+'
-        const newSort = newSign + sortBy
 
-        sort(currentPage, newSort)
+        sort(newSign, sortBy)
     }
 
     return (
@@ -35,22 +33,18 @@ const Sorting = ({ children, sortBy, currentSort, currentPage, sort }) => {
 
 Sorting.propTypes = {
     sortBy: PropTypes.string.isRequired,
-    currentSort: PropTypes.string,
-    currentPage: PropTypes.number,
-    sort: PropTypes.func
+    sort: PropTypes.func,
+    currentSort: PropTypes.object
 }
 
 const mapDispatchToProps = dispatch => ({
-    sort(page, newSort) {
-        axios.get(`api/users?page=${page}&sort=${newSort}`).then(res => {
-            dispatch(sortBy(newSort, res.data.users))
-        })
+    sort(sign, key) {
+        dispatch(sortBy({sign, key}))
     }
 })
 
 const mapStateToProps = state => ({
-    currentSort: state.sort,
-    currentPage: state.page
+    currentSort: state.sort
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting)

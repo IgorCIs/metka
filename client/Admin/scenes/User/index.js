@@ -6,11 +6,9 @@ import Form from './Form'
 const User = ({ users = [], match }) => {
     const user = users.filter(({ _id }) => _id === match.params.id)[0]
 
-    console.log(match.params.id, users)
-
     return user ? (
         <div>
-            <h3>Код: {user._id}</h3>
+            <h3 className="h3">Код: {user._id}</h3>
             <Form user={user}/>
         </div>
     ) : (

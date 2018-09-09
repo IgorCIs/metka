@@ -8,7 +8,8 @@ const Admin = () => (
         <h1 className="h1">Админ</h1>
 
         <Route exact path="/admin" component={Main}/>
-        <Route path="/admin/:id" component={User} />
+        <Route path="/admin/page/:page" component={Main}/>
+        <Route path="/admin/user/:id" component={User} />
     </div>
 )
 

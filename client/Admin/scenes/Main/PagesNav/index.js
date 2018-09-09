@@ -1,21 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import { setPage } from '../../../../store/actions'
+import { Link } from 'react-router-dom'
 
 const arrFromLength = (length = 0, index = 0) => length > 0 ? [
     index,
     ...arrFromLength(length - 1, index + 1)
 ] : []
 
-const PagesNav = ({currentPage = 1, pageCount = 1, sortKey = '+fullname', onClick = () => {}}) => (
+const PagesNav = ({ currentPage = 1, length = 1 }) => (
     <ul className="pagination justify-content-center">
-        {arrFromLength(pageCount, 1).map(page =>
-            <li key={page} onClick={onClick.bind(null, page, sortKey)} className={`page-item${currentPage === page ? ' active' : ''}`}>
-                <span className="page-link">
+        {arrFromLength(length, 1).map(page =>
+            <li key={page} className={`page-item${currentPage === page ? ' active' : ''}`}>
+                <Link className="page-link" to={`/admin/page/${page}`}>
                     {page}
-                </span>
+                </Link>
             </li>)
         }
     </ul>
@@ -23,25 +22,11 @@ const PagesNav = ({currentPage = 1, pageCount = 1, sortKey = '+fullname', onClic
 
 PagesNav.propTypes = {
     currentPage: PropTypes.number,
-    pageCount: PropTypes.number,
-    sortKey: PropTypes.string,
-    onClick: PropTypes.func
+    length: PropTypes.number
 }
 
-const stateToProps = store => ({
-    currentPage: store.page,
-    pageCount: store.pages,
-    sortKey: store.sort
+const mapStateToProps = state => ({
+    length: Math.ceil(state.users.length / state.count)
 })
 
-const dispatchToProps = dispatch => ({
-    onClick(page, sortKey) {
-        axios(`/api/users?page=${page}&sort=${sortKey}`).then(res => {
-            const { page, users } = res.data
-
-            dispatch(setPage(page, users))
-        })
-    }
-})
-
-export default connect(stateToProps, dispatchToProps)(PagesNav)
+export default connect(mapStateToProps, null)(PagesNav)

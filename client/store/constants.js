@@ -1,13 +1,6 @@
 export default {
     UPDATE_USER: 'UPDATE_USER',
-    CHANGE_PAGE: 'CHANGE_PAGE',
-    CHANGE_PAGES: 'CHANGE_PAGES',
-    CHANGE_SORT_KEY: 'CHANGE_SORT_KEY'
+    // CHANGE_PAGE: 'CHANGE_PAGE',
+    CHANGE_SORT: 'CHANGE_SORT',
+    CHANGE_COUNT_ON_PAGE: 'CHANGE_COUNT_ON_PAGE'
 }
-
-// const exampleStore = {
-//     users: [...],
-//     pages: 'number',
-//     page: 'number',
-//     sort: 'string'
-// }
