@@ -1,25 +1,13 @@
 import User from '../models/users'
 
 export function getUsers(req, res) {
-    let { page = 1, count = 30, sort = '+fullname' } = req.query,
-        sendedPage = Number(page)
-        
-    count = Number(count)
-    page = page - 1
-
-    return new Promise(resolve => User.find().sort(`${sort}`).exec((err, users) => {
+    return new Promise(resolve => User.find().exec((err, users) => {
         if(err) res.status(500).send(err)
         else {
-            // from page * count to page * count + count
-            const usersOnPage = users
-                .filter((user, index) => (index >= page * count && index < page * count + count))
-            const pages = Math.ceil(users.length / count)
-            const result = { users: usersOnPage, page: sendedPage, pages, sort }
-            
             try {
-                res.json(result)
+                res.json({ users })
             } catch (e) {
-                resolve(result)
+                resolve({ users })
             }
         }
     }))

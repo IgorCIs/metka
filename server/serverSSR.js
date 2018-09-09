@@ -33,19 +33,19 @@ const middleware = app => {
                     </StaticRouter>
                 </Provider>
             ),
-            [manifest['admin.css']],
+            [manifest['vendor.css'], manifest['admin.css']],
             [manifest['vendor.js'], manifest['admin.js']],
             JSON.stringify(initialState)
         ))
     }))
-
+    
     
     app.get('/login', (req, res) =>
         res.send(SSRTemplate(
             ReactDOMServer.renderToString(
                 <Login/>
             ),
-            [manifest['login.css']],
+            [manifest['vendor.css'], manifest['admin.css']],
             [manifest['vendor.js'], manifest['login.js']]
         ))
     )    
