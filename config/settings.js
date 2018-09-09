@@ -37,5 +37,11 @@ exports.PAGES = {
         entry: path.resolve(CLIENT_SRC_PATH, './Admin/index.js'),
         filenameForHTMLPlugin: path.resolve(CLIENT_BUILD_PATH, './admin.html'),
         relativePath: '/admin'
+    },
+    login: {
+        component: path.resolve(CLIENT_SRC_PATH, './Login/Login.js'),
+        entry: path.resolve(CLIENT_SRC_PATH, './Login/index.js'),
+        filenameForHTMLPlugin: path.resolve(CLIENT_BUILD_PATH, './login.html'),
+        relativePath: '/login'
     }
 }

@@ -4,8 +4,8 @@ export function login(req, res) {
     const { login, password } = req.query
     
     Admins.findOne({ 'login': login }).exec((err, admin) => {
-        if(err) res.status(500).send(err)
-        else if (admin.password === password) {
+        if (err) res.status(500).send(err)
+        else if (admin && admin.password === password) {
             req.session.username = login
             req.session.autorized = true
             
@@ -21,4 +21,8 @@ export function logout(req, res) {
     delete req.session.autorized 
 
     res.json({ logged: false, login })
+}
+
+export const isLogged = (req, res) => {
+    res.json({ logged: req.session.autorized || false })
 }

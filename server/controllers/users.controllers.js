@@ -10,7 +10,9 @@ export function getUsers(req, res) {
     return new Promise(resolve => User.find().sort(`${sort}`).exec((err, users) => {
         if(err) res.status(500).send(err)
         else {
-            const usersOnPage = users.slice(page * count, page * count + count)
+            // from page * count to page * count + count
+            const usersOnPage = users
+                .filter((user, index) => (index >= page * count && index < page * count + count))
             const pages = Math.ceil(users.length / count)
             const result = { users: usersOnPage, page: sendedPage, pages, sort }
             

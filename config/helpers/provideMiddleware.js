@@ -5,7 +5,7 @@ module.exports = (app, devMiddleware, hotMiddleware, compiler) => {
     app.use(hotMiddleware)
 
     Object.keys(PAGES).forEach(pageName => {
-        app.get(PAGES[pageName].relativePath, (req, res, next) => {
+        app.get([PAGES[pageName].relativePath, PAGES[pageName].relativePath + '/*'], (req, res, next) => {
             compiler.outputFileSystem.readFile(PAGES[pageName].filenameForHTMLPlugin, (err, result) => {
                 if (err) return next(err)
 

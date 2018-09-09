@@ -10,6 +10,7 @@ import { getUsers } from './controllers/users.controllers'
 import { Provider } from 'react-redux'
 import storeFactory from '../client/store'
 import { StaticRouter } from 'react-router-dom'
+import Login from './ssr/login'
 
 const middleware = app => {
     app.use(Express.static(path.resolve(__dirname, '../dist/client')))
@@ -39,19 +40,13 @@ const middleware = app => {
     }))
 
     
-    app.use('/login', (req, res) => 
+    app.get('/login', (req, res) =>
         res.send(SSRTemplate(
             ReactDOMServer.renderToString(
-                <form> 
-                    <input vaue='login'/> 
-                    <br/>
-                    <br/>
-                    <input vaue='password'/>
-                    <br/>
-                    <br/>
-                    <button type='submit'> ЛОГИН </button>
-                </form>
-            )
+                <Login/>
+            ),
+            [manifest['login.css']],
+            [manifest['vendor.js'], manifest['login.js']]
         ))
     )    
 }

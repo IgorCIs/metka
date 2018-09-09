@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './PageNav.scss'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -11,13 +10,15 @@ const arrFromLength = (length = 0, index = 0) => length > 0 ? [
 ] : []
 
 const PagesNav = ({currentPage = 1, pageCount = 1, sortKey = '+fullname', onClick = () => {}}) => (
-    <div className={styles.wrapper}>
+    <ul className="pagination justify-content-center">
         {arrFromLength(pageCount, 1).map(page =>
-            <div key={page} onClick={onClick.bind(null, page, sortKey)} className={`${styles.page} ${currentPage === page ? styles.active : ''}`}>
-                {page}
-            </div>)
+            <li key={page} onClick={onClick.bind(null, page, sortKey)} className={`page-item${currentPage === page ? ' active' : ''}`}>
+                <span className="page-link">
+                    {page}
+                </span>
+            </li>)
         }
-    </div>
+    </ul>
 )
 
 PagesNav.propTypes = {

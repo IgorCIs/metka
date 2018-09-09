@@ -24,10 +24,10 @@ class Form extends Component{
         const { update } = this.props
         const { _id, ...user} = this.state
 
-        axios.post(`/api/users/${_id}`, user).then(() => {
-            console.log(user)
-            update(_id, user)
-        })
+        axios.post(`/api/users/${_id}`, user).then(
+            () => update(_id, user),
+            err => console.dir(err)
+        )
     }
 
     inputChange = key => event => {
@@ -56,9 +56,9 @@ class Form extends Component{
                         <tr>
                             <td>Обращение:</td>
                             <td>
-                                <select name="call" value={call} required onChange={this.inputChange('call')}>
-                                    <option value={true}>Вы</option>
-                                    <option value={false}>Ты</option>
+                                <select name="call" value={'' + call} required onChange={this.inputChange('call')}>
+                                    <option value={'true'}>Вы</option>
+                                    <option value={'false'}>Ты</option>
                                 </select>
                             </td>
                         </tr>

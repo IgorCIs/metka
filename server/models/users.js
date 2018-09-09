@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-const userChema = new Schema({
+const userSchema = new Schema({
     fullname: {type: 'String' },
     call: {type: 'Boolean' },
     gender: {type: 'Number' },
@@ -15,7 +15,8 @@ const userChema = new Schema({
             answer: { type: 'String' },
             attemptСount: { type: 'Number' }
         }
-    ]
+    ],
+    __v: { type: 'Number', select: false }
 })
 
-export default mongoose.model('Users', userChema)
+export default mongoose.model('Users', userSchema)
