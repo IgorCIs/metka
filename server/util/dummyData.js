@@ -2,7 +2,7 @@ import User from '../models/users'
 import Admin from '../models/admins'
 
 export default function () {
-    User.count().exec((err, count) => {
+    User.countDocuments().exec((err, count) => {
         if (count >= 50) {
             return
         }
@@ -51,7 +51,7 @@ export default function () {
         })
     })
     
-    Admin.count().exec((err, count) => {
+    Admin.countDocuments().exec((err, count) => {
         if (count >= 1) return
         
         const admin = new Admin({

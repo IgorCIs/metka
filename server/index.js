@@ -1,6 +1,7 @@
 import config from './config'
 import usersRoutes from './routes/users.routes'
 import adminsRoutes from './routes/admins.routes'
+import testsRoutes from './routes/tests.routes'
 import Express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
@@ -45,12 +46,15 @@ process.env.env === 'development' && require('./util/dummyData').default()
 //api
 app.use('/api', usersRoutes)
 app.use('/api', adminsRoutes)
+app.use('/api', testsRoutes)
 
 
-mongoose.connect(config.mongoURL, (error) => {
+mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
     if (error) {
         console.error('MongoDB not running, error: ' + error) 
     }
+
+    console.log('Let\'s roll')
 })
 
 app.listen(config.port) 
