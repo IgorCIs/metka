@@ -1,6 +1,6 @@
 import Admins from '../models/admins'
 
-export function login(req, res) {
+export const login = (req, res) => {
     const { login, password } = req.query
     
     Admins.findOne({ 'login': login }).exec((err, admin) => {
@@ -13,16 +13,15 @@ export function login(req, res) {
         } else {
             res.json({ logged: false })
         }
-    })    
+    })
 }
 
-export function logout(req, res) {
+export const logout = (req, res) => {
     delete req.session.username 
     delete req.session.autorized 
 
-    res.json({ logged: false, login })
+    res.json({ logged: false })
 }
 
-export const isLogged = (req, res) => {
+export const isLogged = (req, res) => 
     res.json({ logged: req.session.autorized || false })
-}
