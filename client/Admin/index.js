@@ -19,9 +19,16 @@ const renderWithStore = store => render(
 
 if (process.env.side === 'client' && process.env.env === 'development') {
     axios.get('/api/users').then(res => {
-        const { users = [], pages = 1, page = 1, sort = '+fullname' } = res.data
+        const { users = [] } = res.data
 
-        renderWithStore(storeFactory({users, pages, page, sort}))
+        renderWithStore(storeFactory({
+            users,
+            count: 30,
+            sort: {key: 'fullname', sign: '+'} }))
     })
 } else
-    renderWithStore(storeFactory(window.__INITIAL_STATE__ || []))
+    renderWithStore(storeFactory({
+        users: window.__INITIAL_STATE__ || [],
+        count: 30,
+        sort: {key: 'fullname', sign: '+'}
+    }))

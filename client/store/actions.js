@@ -6,20 +6,13 @@ export const updateUser = (id, user) => ({
     user
 })
 
-export const setPage = (page, users) => ({
-    type: c.CHANGE_PAGE,
-    page,
-    users
+export const sortBy = ({ sign, key }) => ({
+    type: c.CHANGE_SORT,
+    sign,
+    key
 })
 
-export const setPages = (pages, users) => ({
-    type: c.CHANGE_PAGES,
-    pages,
-    users
-})
-
-export const sortBy = (sort, users) => ({
-    type: c.CHANGE_SORT_KEY,
-    sort,
-    users
+export const setCountOnPage = count => ({
+    type: c.CHANGE_COUNT_ON_PAGE,
+    count
 })
