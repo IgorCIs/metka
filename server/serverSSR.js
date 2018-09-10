@@ -45,7 +45,7 @@ const middleware = app => {
             ReactDOMServer.renderToString(
                 <Login/>
             ),
-            [manifest['vendor.css'], manifest['admin.css']],
+            [manifest['vendor.css']],
             [manifest['vendor.js'], manifest['login.js']]
         ))
     )    

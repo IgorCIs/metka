@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 import SortingField from './SortingField'
 import UserTr from './UserTr'
 
-const Table = ({ users, sort, count, page }) => {
+const Table = ({ users = [], sort, count, page }) => {
     const from = (page - 1) * count
     const to = from + count
+
+    console.log(users)
 
     const viewUsers = users
         .sort((a, b) => sort.sign === '+' ?

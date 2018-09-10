@@ -28,7 +28,7 @@ if (process.env.side === 'client' && process.env.env === 'development') {
     })
 } else
     renderWithStore(storeFactory({
-        users: window.__INITIAL_STATE__ || [],
+        users: window.__INITIAL_STATE__.users || [],
         count: 30,
         sort: {key: 'fullname', sign: '+'}
     }))

@@ -64,7 +64,7 @@ class Form extends Component{
             <form onSubmit={this.submit}>
                 <div className="row">
 
-                    <div className="col-lg-4">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <label><span className="text-danger">*</span>ФИО:</label>
                             <input
@@ -104,7 +104,7 @@ class Form extends Component{
                         </div>
                     </div>
 
-                    <div className="col-lg-4">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <label>Возраст:</label>
                             <input
