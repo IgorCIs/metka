@@ -9,6 +9,8 @@ const userSchema = new Schema({
     company: {type: 'String' },
     tels: [{type: 'String' }],
     comment: {type: 'String' },
+    signs: {type: 'String' },
+    dates: [{type: 'String' }],
     _id: { type: 'String' },
     tests: [
         {

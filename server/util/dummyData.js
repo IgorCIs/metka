@@ -21,6 +21,8 @@ export default function () {
                     tels: ['093105382' + i, '093105382' + i],
                     comment: 'text ' + i,
                     _id: +String(Date.now()).substring(0, 6) + i * 1000,
+                    signs: 'Черт какойто #' + i,
+                    dates: [Date.now(), Date.now()],
                     tests: [
                         {
                             answer: 'ti',
