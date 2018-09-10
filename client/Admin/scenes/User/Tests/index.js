@@ -1,10 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Tests = () => {
+const Tests = ({ tests = [] }) => {
     return (
-        <div>
-        </div>
+        <ul className="list-group">
+            {tests.map((test, index) => (
+                <li key={index} className="list-group-item">
+                    Тест #{index + 1}: {test.answer + ' '}
+                    <span className="badge badge-primary">{test.attemptСount}</span>
+                </li>
+            ))}
+        </ul>
     )
 }
 

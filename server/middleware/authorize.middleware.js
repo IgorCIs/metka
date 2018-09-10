@@ -3,12 +3,8 @@ const throwToLogin = res => {
     res.end()
 }
 
-const throwNext = next => {
-    next()
-    return false
-}
-
-export default urls => (req, res, next) => 
-    urls.every(url => 
-        req.url.match(url) ? req.session.autorized ? throwNext(next) : throwToLogin(res) : throwNext(next)
-    )
+//gl
+export default urls => (req, res, next) =>
+    urls.reduce((allow, url) => new RegExp(url).test(req.url) ? false : allow, true) || req.session.authorized ?
+        next() :
+        throwToLogin(res)

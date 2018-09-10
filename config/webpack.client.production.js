@@ -7,13 +7,12 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 module.exports = () => ({
     entry: clientBuildEntriesByPages(PAGES),
     mode: 'production',
-    devtool: 'source-map',
     optimization: {
         minimizer: [
-            // new UglifyJsPlugin({
-            //     cache: true,
-            //     parallel: true
-            // }),
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true
+            }),
             new OptimizeCSSAssetsPlugin({})
         ]
     },

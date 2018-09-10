@@ -58,7 +58,7 @@ class Form extends Component{
 
     render() {
         const { user, sending, error, success } = this.state
-        const { fullname, call, age, comment, company, tels } = user
+        const { fullname, call, age, comment, company, tels, signs } = user
 
         return (
             <form onSubmit={this.submit}>
@@ -101,6 +101,16 @@ class Form extends Component{
                             <small className="form-text text-muted">
                                 Вводите один номер телефона на строчку. Чем выше номер - тем он приоритетнее
                             </small>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Особые приметы:</label>
+                            <textarea
+                                name="signs"
+                                className="form-control"
+                                onChange={this.inputChange('signs')}
+                                value={signs}
+                                rows="3"/>
                         </div>
                     </div>
 

@@ -7,7 +7,7 @@ export const login = (req, res) => {
         if (err) res.status(500).send(err)
         else if (admin && admin.password === password) {
             req.session.username = login
-            req.session.autorized = true
+            req.session.authorized = true
             
             res.json({ logged: true, login })
         } else {
@@ -18,7 +18,7 @@ export const login = (req, res) => {
 
 export const logout = (req, res) => {
     delete req.session.username 
-    delete req.session.autorized 
+    delete req.session.authorized
 
     res.json({ logged: false })
 }

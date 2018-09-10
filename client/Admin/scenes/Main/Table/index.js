@@ -8,8 +8,6 @@ const Table = ({ users = [], sort, count, page }) => {
     const from = (page - 1) * count
     const to = from + count
 
-    console.log(users)
-
     const viewUsers = users
         .sort((a, b) => sort.sign === '+' ?
             (a[sort.key] > b[sort.key] ? 1 : -1) :
