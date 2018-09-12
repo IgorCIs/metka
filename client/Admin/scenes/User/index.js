@@ -7,6 +7,8 @@ import Tests from './Tests'
 const User = ({ users = [], match }) => {
     const user = users.filter(({ _id }) => _id === match.params.id)[0]
 
+    console.log(user)
+
     return user ? (
         <div>
             <div className="row">
