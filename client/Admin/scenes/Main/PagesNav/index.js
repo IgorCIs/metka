@@ -25,8 +25,13 @@ PagesNav.propTypes = {
     length: PropTypes.number
 }
 
-const mapStateToProps = state => ({
-    length: Math.ceil(state.users.length / state.count)
+const mapStateToProps = ({ users, count, search }) => ({
+    length: Math.ceil(
+        users.filter(user =>
+            new RegExp(search, 'i').test(user.fullname) ||
+            new RegExp(search, 'i').test(user._id)
+        ).length / count
+    )
 })
 
 export default connect(mapStateToProps, null)(PagesNav)

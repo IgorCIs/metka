@@ -51,8 +51,11 @@ Table.propTypes = {
     page: PropTypes.number
 }
 
-const stateToProps = ({ users, sort, count }) => ({
-    users,
+const stateToProps = ({ users, sort, count, search }) => ({
+    users: users.filter(user =>
+        new RegExp(search, 'i').test(user.fullname) ||
+        new RegExp(search, 'i').test(user._id)
+    ),
     sort,
     count
 })

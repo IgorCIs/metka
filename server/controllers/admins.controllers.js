@@ -24,4 +24,4 @@ export const logout = (req, res) => {
 }
 
 export const isLogged = (req, res) => 
-    res.json({ logged: req.session.autorized || false })
+    res.json({ logged: req.session.authorized || false })

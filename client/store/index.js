@@ -1,10 +1,11 @@
 import { createStore, combineReducers } from 'redux'
-import { users, count, sort } from './reducers'
+import { users, count, sort, search } from './reducers'
 
 const storeFactory = initialState => createStore(combineReducers({
     users,
     count,
-    sort
+    sort,
+    search
 }), initialState)
 
 export default storeFactory

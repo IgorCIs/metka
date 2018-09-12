@@ -24,11 +24,14 @@ if (process.env.side === 'client' && process.env.env === 'development') {
         renderWithStore(storeFactory({
             users,
             count: 30,
-            sort: {key: 'fullname', sign: '+'} }))
+            sort: {key: 'fullname', sign: '+'},
+            search: ''
+        }))
     })
 } else
     renderWithStore(storeFactory({
         users: window.__INITIAL_STATE__.users || [],
         count: 30,
-        sort: {key: 'fullname', sign: '+'}
+        sort: {key: 'fullname', sign: '+'},
+        search: ''
     }))
