@@ -4,7 +4,7 @@ const throwToLogin = res => {
 }
 
 //gl
-export default urls => (req, res, next) =>
+export default urls => (req, res, next) => 
     urls.reduce((allow, url) => new RegExp(url).test(req.url) ? false : allow, true) || req.session.authorized ?
         next() :
         throwToLogin(res)
