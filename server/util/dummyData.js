@@ -6,15 +6,22 @@ import uuid from 'uuid-js'
 const randomInteger = (min, max) => 
     Math.round(min - 0.5 + Math.random() * (max - min + 1))
 
-const randomApi = 'https://randomuser.me/api/' 
+const randomApi = 'https://randomuser.me/api/'
 
 const createApiRespose = api => () => fetch(api)
 
-const getRandomUsers = createApiRespose(randomApi) 
+const getRandomUsers = createApiRespose(randomApi)
 
-const randomReturn = value => randomInteger(0, 1) ? value : '' 
+const randomReturn = value => randomInteger(0, 1) ? value : ''
 
-const createPosts = data => 
+const randomDate = year => new Date(year, 1, 1, 1, 1, 1, 1)
+
+const createDates = () => {
+    
+}
+
+
+const createPosts = data =>
     new User({
         _id: uuid.create().toString().substring(0, 6),
         gender: data.gender == 'male' ? 1 : 0,
@@ -44,17 +51,16 @@ const createPosts = data =>
 
 export default function () {
     User.countDocuments().exec((err, count) => {
-        if (count >= 50) {
-            return
-        }
+        if (count >= 50) return
 
         try {
             void function createUsers(i){
-                if(i > 50) return 
-
+                if(i > 50) return
                 getRandomUsers().then(response =>{
                     response.json().then(data => 
-                        User.create(createPosts(data.results[0]), () => {})
+                        User.create(
+                            createPosts(data.results[0]), () => {}
+                        )
                     ).catch(() => {})
                 })
 
@@ -83,5 +89,3 @@ export default function () {
         })
     })
 }
-
-
