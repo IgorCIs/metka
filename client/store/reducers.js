@@ -21,14 +21,6 @@ export const users = (state = [], action) => {
     }
 }
 
-// export const page = (state = 1, action) => {
-//     switch (action.type) {
-//     case c.CHANGE_PAGE:
-//         return +action.page
-//     default: return state
-//     }
-// }
-
 export const count = (state = 30, action) => {
     switch (action.type){
     case c.CHANGE_COUNT_ON_PAGE:
@@ -45,5 +37,14 @@ export const sort = (state = {sign: '+', key: 'fullname'}, action) => {
             key: action.key || state.key
         }
     default: return state
+    }
+}
+
+export const search = (state = '', action) => {
+    switch (action.type) {
+    case c.SEARCH:
+        return action.search
+    default:
+        return state
     }
 }

@@ -7,8 +7,6 @@ import axios from 'axios'
 class Form extends Component{
     constructor(props, context) {
         super(props, context)
-
-        console.log(props.user)
     }
 
     state = {
@@ -58,7 +56,7 @@ class Form extends Component{
 
     render() {
         const { user, sending, error, success } = this.state
-        const { fullname, call, age, comment, company, tels, signs } = user
+        const { fullname, call, age, comment, company, tels, signs, gender } = user
 
         return (
             <form onSubmit={this.submit}>
@@ -135,6 +133,18 @@ class Form extends Component{
                                 placeholder="Компания"
                                 onChange={this.inputChange('company')}
                                 value={company}/>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Пол:</label>
+                            <select
+                                name="gender"
+                                value={gender}
+                                onChange={this.inputChange('gender')}
+                                className="form-control">
+                                <option value={1}>М</option>
+                                <option value={0}>Ж</option>
+                            </select>
                         </div>
 
                         <div className="form-group">

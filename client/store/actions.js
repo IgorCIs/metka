@@ -16,3 +16,8 @@ export const setCountOnPage = count => ({
     type: c.CHANGE_COUNT_ON_PAGE,
     count
 })
+
+export const setSearchValue = value => ({
+    type: c.SEARCH,
+    search: value
+})
