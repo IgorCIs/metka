@@ -12,14 +12,20 @@ const createApiRespose = api => () => fetch(api)
 
 const getRandomUsers = createApiRespose(randomApi)
 
-const randomReturn = value => randomInteger(0, 1) ? value : ''
+const randomReturn = callback => randomInteger(0, 1) ? callback() : ''
 
-const randomDate = year => new Date(year, 1, 1, 1, 1, 1, 1)
+const randomDate = () => new Date(randomInteger(1971, 2017), ...[...Array(4).keys()].map(() => randomInteger(1, 30))).getTime()
 
 const createDates = () => {
-    
-}
+    const res = new Array()
 
+    randomReturn(() => {
+        res.push(randomDate())
+        randomReturn(() => res.push(randomDate()))
+    })
+
+    return res 
+}
 
 const createPosts = data =>
     new User({
@@ -28,22 +34,22 @@ const createPosts = data =>
         fullname: data.name.first + ' ' + data.name.last,
         call: randomInteger(0, 1),
         age: randomInteger(18, 50),
-        comment: 'ХЗ ЧТО ТУТ ВСТАВИТЬ ХОТЬ УБЕЙ',
+        comment: 'Comment',
         tels: [data.phone, data.cell],
         company: data.location.street,
         signs: data.location.state,
-        dates: [randomReturn(Date.now()), randomReturn(Date.now())],
+        dates: [...createDates()],
         tests: [
             {
-                answer: 'Test #1',
+                answer: 'first test',
                 attemptСount: 1
             },
             {
-                answer: 'Test #2',
-                attemptСount: 2
+                answer: 'second test',
+                attemptСount: 6
             },
             {
-                answer: 'Test #3',
+                answer: 'third test',
                 attemptСount: 3
             }
         ]
