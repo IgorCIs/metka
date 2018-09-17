@@ -12,7 +12,7 @@ const createApiRespose = api => () => fetch(api)
 
 const getRandomUsers = createApiRespose(randomApi)
 
-const randomReturn = callback => randomInteger(0, 1) ? callback() : ''
+const randomReturn = callback => randomInteger(0, 1) && callback() 
 
 const randomDate = () => new Date(randomInteger(1971, 2017), ...[...Array(4).keys()].map(() => randomInteger(1, 30))).getTime()
 
@@ -24,7 +24,7 @@ const createDates = () => {
         randomReturn(() => res.push(randomDate()))
     })
 
-    return res 
+    return res
 }
 
 const createPosts = data =>
