@@ -43,12 +43,12 @@ module.exports = ({ env, hash, side }) => (env === 'development' || side === 'cl
     module: {
         rules: [
             {
-                test: /\.s?css/,
+                test: /\.s?(a|c)ss/,
                 exclude: /node_modules/,
                 use: loaders(env, side, true)
             },
             {
-                test: /\.scss/,
+                test: /\.s?(a|c)ss/,
                 include: /node_modules/,
                 use: loaders(env, side, false)
             }

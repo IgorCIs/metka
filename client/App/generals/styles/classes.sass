@@ -1,0 +1,17 @@
+@import './mixins'
+
+.container
+    width: 100% 
+    padding-right: $containerPadding
+    padding-left: $containerPadding
+    margin-right: auto
+    margin-left: auto
+
+    @for $i from length($containerWidths) through 1
+        @media(min-width: nth($mediaList, $i))
+            max-width: nth($containerWidths, $i)
+
+.wrapper
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between

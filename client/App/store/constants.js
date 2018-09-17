@@ -1,0 +1,5 @@
+export default {
+    UPDATE_USER: 'UPDATE_USER',
+    SET_PROGRESS: 'SET_PROGRESS',
+    ADD_TO_HISTORY: 'ADD_TO_HISTORY',
+}

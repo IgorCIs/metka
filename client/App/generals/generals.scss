@@ -1,0 +1,10 @@
+@import './styles/typo';
+
+:global {
+  @import './styles/variables';
+  @import './styles/classes';
+  @import './styles/mixins';
+  @import './styles/common';
+}
+
+
