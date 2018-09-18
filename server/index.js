@@ -9,6 +9,8 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 const MongoStore = require('connect-mongo')(session)
+import csurf from 'csurf'
+
 
 mongoose.Promise = global.Promise
 
@@ -24,6 +26,12 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+const csrfMiddleware = csurf({
+    cookie: true
+})
+
+app.use(csrfMiddleware)
 
 import autorizeMiddleware from './middleware/authorize.middleware'
 
@@ -43,18 +51,19 @@ if (process.env.env === 'development' && process.env.side === 'client') {
 
 process.env.env === 'development' && require('./util/dummyData').default()
 
+import apiMiddleware from './middleware/api.middleware'
+
 //api
-app.use('/api', usersRoutes)
-app.use('/api', adminsRoutes)
-app.use('/api', testsRoutes)
+app.use('/api', apiMiddleware('12345'), usersRoutes)
+app.use('/api', apiMiddleware('12345'), adminsRoutes)
+app.use('/api', apiMiddleware('12345'), testsRoutes)
 
 
 mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
     if (error) {
         console.error('MongoDB not running, error: ' + error) 
-    }
-
-    console.log('Let\'s roll')
+    } else 
+        console.log('Let\'s roll')
 })
 
 app.listen(config.port) 

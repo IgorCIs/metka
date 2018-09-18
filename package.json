@@ -9,7 +9,7 @@
     "server:prestart": "npm run client:build && rimraf server/ssr && webpack --env.env=development --env.side=server && rimraf server/ssr/assets",
     "server:dev": "npm run server:prestart && cross-env BABEL_DISABLE_CACHE=1 side=server env=development nodemon server/index.js",
     "server:build": "rimraf dist && npm run server:prestart && webpack --env.side=server --env.env=production",
-    "start": "node dist/server.bundle.js"
+    "start": "npm run server:build && node dist/server.bundle.js"
   },
   "author": "",
   "license": "ISC",
@@ -58,9 +58,11 @@
     "connect-redis": "^3.3.3",
     "cookie-parser": "^1.4.3",
     "cookie-sessions": "0.0.2",
+    "csurf": "^1.9.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "express-sessions": "^1.0.6",
+    "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.12",
     "node-fetch": "^2.2.0",
     "passport": "^0.4.0",

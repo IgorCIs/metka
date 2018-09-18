@@ -38,8 +38,8 @@ const middleware = app => {
             JSON.stringify(initialState)
         ))
     }))
-    
-    
+
+
     app.get('/login', (req, res) =>
         res.send(SSRTemplate(
             ReactDOMServer.renderToString(
