@@ -39,20 +39,20 @@ const createPosts = data =>
         company: data.location.street,
         signs: data.location.state,
         dates: [...createDates()],
-        tests: [
-            {
-                answer: 'first test',
-                attemptСount: 1
+        tests: {
+            'first': {
+                answer: 'good',
+                count: 1
             },
-            {
-                answer: 'second test',
-                attemptСount: 6
+            'second': {
+                answer: 'bad',
+                count: 6
             },
-            {
-                answer: 'third test',
-                attemptСount: 3
+            'third': {
+                answer: 'notbad',
+                count: 3
             }
-        ]
+        }
     })
 
 export default function () {
