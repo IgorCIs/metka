@@ -1,8 +1,8 @@
 export default {
-    port: 1945,
-    mongoURL: 'mongodb://localhost:27017/users',
+    port: process.env.PORT || 1945,
+    mongoURL: process.env.MONGODB_URI || 'mongodb://localhost:27017/users',
     redis: {
-        url: 'mongodb://localhost:27017/users',
+        url: process.env.MONGODB_URI || 'mongodb://localhost:27017/users',
         secret: 'udachi ebat'
     }
 }

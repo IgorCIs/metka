@@ -10,6 +10,7 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 const MongoStore = require('connect-mongo')(session)
 
+
 mongoose.Promise = global.Promise
 
 const app = Express()
@@ -24,6 +25,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
 
 import autorizeMiddleware from './middleware/authorize.middleware'
 
@@ -52,9 +54,9 @@ app.use('/api', testsRoutes)
 mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
     if (error) {
         console.error('MongoDB not running, error: ' + error) 
-    }
-
-    console.log('Let\'s roll')
+    } else 
+        console.log('Let\'s roll')
 })
 
-app.listen(config.port) 
+
+app.listen(config.port, '0.0.0.0')  

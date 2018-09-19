@@ -6,6 +6,8 @@ import ProgressBar from './components/ProgressBar'
 
 import styles from './App.scss'
 
+
+
 const App = () => (
     <div className={styles.app}>
         {views.map((View, index) => (

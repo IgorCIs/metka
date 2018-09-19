@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import storeFactory from '../store'
 import axios from 'axios'
 import { BrowserRouter as Router } from 'react-router-dom'
-
 import 'bootstrap/scss/bootstrap.scss'
 
 const renderWithStore = store => render(
