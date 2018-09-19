@@ -12,12 +12,12 @@ const userSchema = new Schema({
     signs: {type: 'String' },
     dates: [{type: 'String' }],
     _id: { type: 'String' },
-    tests: [
-        {
+    tests: {
+        type: {
             answer: { type: 'String' },
-            attemptСount: { type: 'Number' }
+            count: { type: 'Number' }
         }
-    ],
+    },
     __v: { type: 'Number', select: false }
 })
 
