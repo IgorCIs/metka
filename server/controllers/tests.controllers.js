@@ -1,9 +1,9 @@
 import Users from '../models/users'
 
 export const setTest = (req, res) => {
-    const { userID, testID, answer, count } = req.body
+    const { userID, name, answer, count } = req.body
     Users.findById(userID).exec((err, user) => {
-        user.tests[testID] = { ...user.tests[testID], answer, attemptСount: count }
+        user.tests[name] = { ...user.tests[name], answer, count }
 
         user.set({ ...user  })
         
