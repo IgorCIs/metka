@@ -10,7 +10,7 @@ const App = () => (
     <div className={styles.app}>
         {views.map((View, index) => (
             <AnimMounting key={index} index={index}>
-                <View/>
+                {View}
             </AnimMounting>
         ))}
         <ProgressBar/>

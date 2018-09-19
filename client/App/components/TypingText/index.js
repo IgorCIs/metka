@@ -7,28 +7,36 @@ export default class TypingText extends PureComponent {
     }
 
     static propTypes = {
-        text: PropTypes.string.isRequired
+        text: PropTypes.string.isRequired,
+        callback: PropTypes.func
     }
 
     state = {
         viewedText: '',
     }
 
+    timeout = null
+
     typing = () => {
         const { viewedText } = this.state
-        const { text } = this.props
+        const { text, callback } = this.props
 
         if (viewedText !== text)
-            setTimeout(() => {
+            this.timeout = setTimeout(() => {
                 const nextSymbol = text.replace(viewedText, '')[0]
 
                 this.setState({viewedText: viewedText + nextSymbol})
                 this.typing()
             }, 50 + Math.random() * 100)
+        else if (callback) callback()
     }
 
     componentDidMount() {
         this.typing()
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timeout)
     }
 
     render() {

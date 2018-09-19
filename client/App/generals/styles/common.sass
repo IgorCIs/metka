@@ -127,7 +127,17 @@ input[type=number]
                 padding: 20px 10px
 
 
-            
+@keyframes flip
+    0%
+        transform: rotateY(0)
+    25%
+        transform: rotateY(-180deg)
+    50%
+        transform: rotateY(0deg)
+    75%
+        transform: rotateY(180deg)
+    100%
+        transform: rotateY(0)
 
 .coin
     perspective: 1000px;
@@ -162,19 +172,6 @@ input[type=number]
     &-back
         background-image: url('./../common-images/back.png')
         transform: rotateY(180deg);
-
-@keyframes flip
-    0%
-        transform: rotateY(0)
-    25%
-        transform: rotateY(-180deg)
-    50%
-        transform: rotateY(0deg)
-    75%
-        transform: rotateY(180deg)
-    100%
-        transform: rotateY(0)
-
 
 .item-list
     margin-top: 70px
@@ -323,6 +320,9 @@ input[type=number]
 .fast
     display: flex
     justify-content: flex-end
+    position: absolute
+    top: 0
+    right: 0
     padding-right: 30px
     padding-top: 15px
     &-button
@@ -373,11 +373,11 @@ input[type=number]
     &.routhine
         background-image: url('./../common-images/belka.svg')
         &:hover
-            background-image: url('./../common-images/color/belka.svg')
+            background-image: url('../common-images/color/belka-color.svg')
     &.books
         background-image: url('./../common-images/book.svg')
         &:hover
-            background-image: url('./../common-images/color/book.svg')
+            background-image: url('../common-images/color/book-color.svg')
     &.brain
         background-image: url('./../common-images/life-vest.svg')
         &:hover
@@ -466,7 +466,9 @@ input[type=number]
     
 
 .last_slide
-    background: #fafafa 
+    background: #fafafa
+    overflow: auto
+    max-height: 100%
     .slide
         background: #fafafa
         color: $black

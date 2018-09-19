@@ -1,12 +1,12 @@
 import React, { PureComponent, Fragment } from 'react'
 
-import TypingText from '../../components/TipingText'
+import TypingText from '../../components/TypingText'
 import Layout from '../../components/Layout'
-import { reloadProgress, getUserCall, goToView } from '../../store'
+import { reloadProgress, getUserCall, goToView, setTest } from '../../store'
 
 import animStyles from '../../components/AnimMounting/AnimWrapper.scss'
 
-export default class Number extends PureComponent {
+export default class Numbers extends PureComponent {
     constructor(props, context) {
         super(props, context)
     }
@@ -20,7 +20,7 @@ export default class Number extends PureComponent {
     }
 
     click = value => () => {
-        console.log(value)
+        setTest('Numbers', value)
         this.setState({showWinView: true})
     }
 

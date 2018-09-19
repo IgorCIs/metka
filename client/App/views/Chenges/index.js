@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 
-import TypingText from '../../components/TipingText'
+import TypingText from '../../components/TypingText'
 import Layout from '../../components/Layout'
-import { reloadProgress, getUserCall, goToView } from '../../store'
+import { reloadProgress, getUserCall, goToView, setTest } from '../../store'
 
 export default class Changes extends PureComponent {
     constructor(props, context) {
@@ -14,7 +14,7 @@ export default class Changes extends PureComponent {
     }
 
     click = value => () => {
-        console.log(value)
+        setTest('Changes', value)
         goToView(2)
     }
 
