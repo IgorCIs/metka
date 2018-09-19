@@ -4,12 +4,10 @@ import AnimMounting from './components/AnimMounting'
 import views from './views'
 import ProgressBar from './components/ProgressBar'
 
-import styles from './App.scss'
-
-
+import './App.scss'
 
 const App = () => (
-    <div className={styles.app}>
+    <div>
         {views.map((View, index) => (
             <AnimMounting key={index} index={index}>
                 {View}

@@ -1,6 +1,5 @@
 import React  from 'react'
 import ReactDOMServer  from 'react-dom/server'
-import App  from './ssr/app'
 import Admin  from './ssr/admin'
 import manifest  from '../dist/client/manifest'
 import path  from 'path'
@@ -17,8 +16,8 @@ const middleware = app => {
 
     app.get('/', (req, res) => {
         res.send(SSRTemplate(
-            ReactDOMServer.renderToString(<App/>),
-            [manifest['app.css']],
+            ReactDOMServer.renderToString(<div>loading</div>),
+            [manifest['vendor.css'], manifest['app.css']],
             [manifest['vendor.js'], manifest['app.js']]
         ))
     })

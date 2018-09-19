@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Tests = ({ tests = [] }) => {
+const Tests = ({ tests = {} }) => {
     return (
         <ul className="list-group">
-            {tests.map((test, index) => (
-                <li key={index} className="list-group-item">
-                    Тест #{index + 1}: {test.answer + ' '}
-                    <span className="badge badge-primary">{test.attemptСount}</span>
+            {Object.keys(tests).map(key => (
+                <li key={key} className="list-group-item">
+                    Тест {key}: {tests[key].answer + ' '}
+                    <span className="badge badge-primary">{tests[key].count}</span>
                 </li>
             ))}
         </ul>
@@ -15,7 +15,7 @@ const Tests = ({ tests = [] }) => {
 }
 
 Tests.propTypes = {
-    tests: PropTypes.array
+    tests: PropTypes.object
 }
 
 export default Tests
