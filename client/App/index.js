@@ -9,9 +9,12 @@ import 'bootstrap/scss/bootstrap-reboot.scss'
 import 'bootstrap/scss/bootstrap-grid.scss'
 import './generals/generals.scss'
 
-render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
-    document.getElementById('root')
-)
+setTimeout(() => {
+    document.getElementById('root').innerHTML = ''
+    render(
+        <Provider store={store}>
+            <App/>
+        </Provider>,
+        document.getElementById('root')
+    )
+}, 2000)

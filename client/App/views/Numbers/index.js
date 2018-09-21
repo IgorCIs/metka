@@ -45,7 +45,7 @@ export default class Numbers extends PureComponent {
                                 {[...new Array(10).keys()].map(value => (
                                     <div
                                         key={value}
-                                        className="number col"
+                                        className="number"
                                         onClick={this.click(value + 1)}
                                     >
                                         <span>{value + 1}</span>
@@ -73,7 +73,7 @@ export default class Numbers extends PureComponent {
                         <div className="container">
                             <div className="row">
                                 <div className="title col-12 capslock">
-                                    <TypingText text={getUserCall() ? 'Вы угадали !' : 'Ты угадал !'}/>
+                                    <TypingText text={getUserCall() ? 'Вы угадали!' : 'Ты угадал!'}/>
                                 </div>
                             </div>
                         </div>

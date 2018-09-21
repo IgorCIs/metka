@@ -31,7 +31,7 @@ export default class Stupid extends PureComponent {
                                 {[...new Array(10).keys()].map(value => (
                                     <div
                                         key={value}
-                                        className="number col"
+                                        className="number"
                                         onClick={this.nextPageByValue(value + 1)}
                                     >
                                         <span>{value + 1}</span>

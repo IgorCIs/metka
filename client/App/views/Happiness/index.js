@@ -3,7 +3,6 @@ import React, { PureComponent, Fragment } from 'react'
 import Layout from '../../components/Layout'
 import TypingText from '../../components/TypingText'
 import { getUserCall, reloadProgress, goToView, getTest, setTest } from '../../store'
-import Door from '../../components/Door'
 
 export default class Happiness extends PureComponent {
     constructor(props, context) {
@@ -63,7 +62,6 @@ export default class Happiness extends PureComponent {
                         </div>
                     </div>
                 </Layout>
-                <Door callback={setTest.bind(null, 'Happiness', 'Быстрый ответ')}/>
                 {error && <div className="error" style={{position: 'absolute'}}>
                     <div className="title">
                         <TypingText text="Сбой системы"/>

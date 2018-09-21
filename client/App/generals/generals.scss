@@ -1,5 +1,30 @@
 @import './styles/typo';
 
+@keyframes :global(spin) {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  20% {
+    transform: rotateY(180deg);
+  }
+
+  40% {
+    transform: rotateY(180deg);
+  }
+
+  60% {
+    transform: rotateY(180deg);
+  }
+
+  80% {
+    transform: rotateY(360deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
 :global {
   @import './styles/variables';
   @import './styles/classes';

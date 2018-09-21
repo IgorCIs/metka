@@ -26,15 +26,7 @@ export default class HappyEnd extends PureComponent {
             <Fragment>
                 <Layout className="w-100">
                     <div className="wrapper">
-                        <div className="container">
-                            <div className="row">
-                                <div className="coin">
-                                    <div className="coin-fliper">
-                                        <div className="coin-front"/>
-                                        <div className="coin-back"/>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="loader">
                         </div>
                     </div>
                 </Layout>

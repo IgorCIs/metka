@@ -12,15 +12,20 @@ export default class GoodFinal extends PureComponent {
 
     state = {
         text: 0,
-        showPhone: false
+        showPhone: false,
+        nextText: false
     }
 
     componentDidMount() {
         reloadProgress(1)
     }
 
+    startNextText = () => {
+        this.setState({nextText: true})
+    }
+
     render() {
-        const { text, showPhone } = this.state
+        const { text, showPhone, nextText } = this.state
 
         return (
             <Fragment>
@@ -32,21 +37,31 @@ export default class GoodFinal extends PureComponent {
                                 callback={this.setState.bind(this, {text : 1})}
                             />
                         </div>
-                        {text > 0 && <div className="title title_small">
+                        {text > 0 && <div className="title title_small" style= {{marginBottom: '30px'}}>
                             <TypingText
-                                text="вот мой номер на всякий случай!"
-                                callback={this.setState.bind(this, {text : 2})}
+                                callback={this.startNextText}
+                                text="вот мой номер"
                             />
+                            <br/>
+                            {nextText && <TypingText
+                                text=" на всякий случай"
+                                callback={this.setState.bind(this, {text : 2})}
+                            />}
                         </div>}
                         {text > 1 && <div>
-                            {!showPhone && <div className="title title_small">+3809х ххх хххх!</div>}
-                            {showPhone && <div className="title title_small">+38096 666 6666!</div>}
+                            {!showPhone && <div
+                                className="title title_small telnum"
+                                onClick={this.showPhoneHandle} 
+                                style={{cursor: 'pointer'}}>
+                                    +3809х ххх хххх
+                            </div>}
+                            {showPhone && <div className="title title_small telnum">+38096 666 6666</div>}
                             {!showPhone && <div
                                 className="show"
                                 style={{cursor: 'pointer'}}
                                 onClick={() => this.setState({showPhone: true})}
                             >
-                                Показать
+                                показать
                             </div>}
                         </div>}
                     </div>

@@ -16,7 +16,10 @@ const middleware = app => {
 
     app.get('/', (req, res) => {
         res.send(SSRTemplate(
-            ReactDOMServer.renderToString(<div>loading</div>),
+            ReactDOMServer.renderToString(
+                <div className="row h-100">
+                    <div className="loader"> </div>
+                </div>),
             [manifest['vendor.css'], manifest['app.css']],
             [manifest['vendor.js'], manifest['app.js']]
         ))

@@ -34,7 +34,7 @@ const createPosts = data =>
         fullname: data.name.first + ' ' + data.name.last,
         call: randomInteger(0, 1),
         age: randomInteger(18, 50),
-        comment: 'Comment',
+        comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse tristique pretium euismod. Duis et justo dapibus, feugiat libero non, laoreet orci. Sed a neque viverra, rutrum turpis tempus, tempor diam. In vel lacus a nisi condimentum suscipit in nec massa. Cras non pharetra risus, nec vehicula metus. Donec elementum vulputate facilisis. Ut dui neque, tempus a nibh quis, viverra venenatis elit. Nunc non dolor consequat, auctor tellus vel, molestie leo.',
         tels: [data.phone, data.cell],
         company: data.location.street,
         signs: data.location.state,
@@ -73,6 +73,7 @@ export default function () {
                 createUsers(++i)
             }(1)
 
+            console.log('DummyUsers created!')
         } catch (error) {
             console.log('No dummy posts for you')
         }
@@ -82,8 +83,8 @@ export default function () {
         if (count >= 1) return
         
         const admin = new Admin({
-            login: 'superigor',
-            password: 'igormegakrut'
+            login: 'admin',
+            password: 'admin'
         })
 
         Admin.create(admin, (error) => {
