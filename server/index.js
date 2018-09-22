@@ -50,7 +50,6 @@ app.use('/api', usersRoutes)
 app.use('/api', adminsRoutes)
 app.use('/api', testsRoutes)
 
-
 mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
     if (error) {
         console.error('MongoDB not running, error: ' + error) 
@@ -60,3 +59,7 @@ mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
 
 
 app.listen(config.port, '0.0.0.0')  
+
+import generate from './util/generatekeys'
+
+generate()
