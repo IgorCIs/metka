@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 
 import SortingField from './SortingField'
 import UserTr from './UserTr'
-import SortWorker from './sort.worker.js'
+
+let SortWorker
+if (process.env.side === 'client')
+    SortWorker = require('./sort.worker.js')
 
 class Table extends PureComponent {
     constructor(props, context) {
@@ -18,7 +21,7 @@ class Table extends PureComponent {
         count: 0
     }
 
-    sortWorker = new SortWorker()
+    sortWorker = SortWorker ? new SortWorker() : null
 
     static propTypes = {
         users: PropTypes.array,
@@ -50,12 +53,12 @@ class Table extends PureComponent {
     })
 
     componentDidUpdate() {
-        if (this.state.loading)
+        if (this.state.loading && process.env.side === 'client')
             this.asyncSortUsers().then(({ viewUsers, count, page }) => this.setState({viewUsers, count, page}))
     }
 
     componentDidMount() {
-        if (this.state.loading)
+        if (this.state.loading && process.env.side === 'client')
             this.asyncSortUsers().then(({ viewUsers, count, page }) => this.setState({viewUsers, count, page}))
     }
 
