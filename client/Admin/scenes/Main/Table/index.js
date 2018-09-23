@@ -68,6 +68,7 @@ class Table extends PureComponent {
 
     render() {
         const { viewUsers, loading, page, count } = this.state
+        const { users } = this.props
 
         return (
             <div className="table-responsive position-relative">
@@ -96,7 +97,7 @@ class Table extends PureComponent {
                     </tbody>
                 </table>
 
-                {loading && <div
+                {loading && user.length > 500 && <div
                     className="position-fixed"
                     style={{
                         top: '0',

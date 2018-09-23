@@ -56,7 +56,11 @@ export default class GoodFinal extends PureComponent {
                                 style={{cursor: 'pointer'}}>
                                     +3809х ххх хххх
                             </div>}
-                            {showPhone && <div className="title title_small telnum">+38096 666 6666</div>}
+                            {showPhone && <div className="title title_small telnum">
+                                <a href='tel: +380966 666 6666'>
+                                    +38096 666 6666 
+                                </a>
+                            </div>}
                             {!showPhone && <div
                                 className="show"
                                 style={{cursor: 'pointer'}}
