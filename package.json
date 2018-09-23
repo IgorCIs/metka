@@ -9,7 +9,8 @@
     "server:prestart": "npm run client:build && rimraf server/ssr && webpack --env.env=development --env.side=server && rimraf server/ssr/assets",
     "server:dev": "npm run server:prestart && cross-env BABEL_DISABLE_CACHE=1 side=server env=development nodemon server/index.js",
     "server:build": "rimraf dist && npm run server:prestart && webpack --env.side=server --env.env=production",
-    "start": "node dist/server.bundle.js"
+    "start": "node dist/server.bundle.js",
+    "clear": "cross-env CLEAR_DB=true ADDCODS_DB=true node dist/server.bundle.js"
   },
   "author": "Super Igor && Mega Nikita",
   "license": "ISC",
