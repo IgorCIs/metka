@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Layout from '../../components/Layout'
-import { setPropgress } from '../../store/actions'
+import { setPropgress, updateUser } from '../../store/actions'
 
 class BadFinal extends PureComponent {
     constructor(props, context) {
@@ -12,15 +12,34 @@ class BadFinal extends PureComponent {
 
     static propTypes = {
         user: PropTypes.object,
-        progressFull: PropTypes.func
+        progressFull: PropTypes.func,
+        progressType: PropTypes.func,
+        telForUser: PropTypes.func
     }
 
     state = {
-        showPhone: false
+        showPhone: false,
+        telValue: ''
     }
+
+    timeout = null
+    indexed = false
 
     componentDidMount() {
         this.props.progressFull()
+        this.props.progressType(this.props.user)
+    }
+
+    handleChangeTel = event => {
+        clearTimeout(this.timeout)
+
+        this.setState({telValue: event.target.value})
+
+        this.timeout = setTimeout(() => {
+            console.log(this.indexed)
+            this.props.telForUser(this.props.user, this.state.telValue, this.indexed)
+            this.indexed = true
+        }, 1000)
     }
 
     showPhoneHandle = () => {
@@ -28,7 +47,7 @@ class BadFinal extends PureComponent {
     }
 
     render() {
-        const { showPhone } = this.state
+        const { showPhone, telValue } = this.state
         const { user } = this.props
 
         return (
@@ -57,7 +76,13 @@ class BadFinal extends PureComponent {
                             <div className="timing">
                                 <div className="timing_title">либо я наберу {user.call ? 'вас' : 'тебя'} в удобное время</div>
                                 <div className="timing_input">
-                                    <input className="timing_tel" type="text" placeholder="Введите номер"/>
+                                    <input
+                                        className="timing_tel"
+                                        type="text"
+                                        placeholder="Введите номер"
+                                        value={telValue}
+                                        onChange={this.handleChangeTel}
+                                    />
                                     <div className="timing_diap">c <input type="text" value="11" /> до <input type="text" value="18" /></div>
                                 </div>
                             </div>
@@ -76,6 +101,21 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     progressFull() {
         dispatch(setPropgress(1))
+    },
+    progressType(user) {
+        dispatch(updateUser({
+            ...user,
+            progressType: true
+        }))
+    },
+    telForUser(user, tel, indexed) {
+        const { tels = [] } = user
+        const [, ...otherTels] = tels
+
+        dispatch(updateUser({
+            ...user,
+            tels: !indexed ? [tel, ...tels] : [tel, ...otherTels]
+        }))
     }
 })
 

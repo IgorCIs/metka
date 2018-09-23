@@ -15,6 +15,10 @@ const toLocalStr = ({ day, month, year }) =>
 
 const getDate = str => toLocalStr(toDayMonthYear(formatToDate(str)))
 
+const typeByUser = ({ progressType, dates }) => progressType === true ? '✓' :
+    progressType === false ? '✗' :
+        dates[0] ? '...' : '-'
+
 const circle = enable => (
     <div
         className={enable ? 'bg-success' : 'bg-light'}
@@ -37,7 +41,7 @@ const UserTr = ({ user = {}, index = 1, page = 1, count }) => (
             </Link>
         </td>
         <td>{circle(!!user.dates[0])}</td>
-        <td>none</td>
+        <td style={{ fontSize: '20px' }}>{typeByUser(user)}</td>
         <td>{user.dates[0] ? getDate(user.dates[0]) : '-'}</td>
         <td>{user.dates[1] ? getDate(user.dates[1]) : '-'}</td>
     </tr>

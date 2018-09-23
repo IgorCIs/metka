@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 
 import Layout from '../../components/Layout'
 import TypingText from '../../components/TypingText'
-import { getUserCall, reloadProgress } from '../../store'
+import { getUserCall, reloadProgress, setProgressType } from '../../store'
 import OnceAgain from '../../components/OnceAgain'
 
 export default class GoodFinal extends PureComponent {
@@ -18,6 +18,7 @@ export default class GoodFinal extends PureComponent {
 
     componentDidMount() {
         reloadProgress(1)
+        setProgressType(false)
     }
 
     startNextText = () => {
