@@ -18,7 +18,8 @@ const userSchema = new Schema({
             count: { type: 'Number' }
         }
     },
-    callbackMessage: { type: String },
+    callbackMessage: { type: 'String' },
+    progressType: { type: 'Boolean' },
     __v: { type: 'Number', select: false }
 })
 

@@ -10,7 +10,6 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 const MongoStore = require('connect-mongo')(session)
 
-
 mongoose.Promise = global.Promise
 
 const app = Express()
