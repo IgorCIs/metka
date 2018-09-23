@@ -10,7 +10,6 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 const MongoStore = require('connect-mongo')(session)
 
-
 mongoose.Promise = global.Promise
 
 const app = Express()
@@ -43,7 +42,7 @@ if (process.env.env === 'development' && process.env.side === 'client') {
     require('./serverSSR').default(app)    
 }
 
-process.env.env === 'development' && require('./util/dummyData').default()
+// process.env.env === 'development' && require('./util/dummyData').default()
 
 //api
 app.use('/api', usersRoutes)

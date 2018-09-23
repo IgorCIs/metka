@@ -45,7 +45,7 @@ export const updateUser = (req, res) => {
         if(err) res.status(500).send(err)
         else if(!user) res.status(500).json({message: 'No user width this id', id: req.params.id}) 
         else {
-            user.set({ ...user, ...body})
+            user.set({ ...user, ...body })
             
             user.save((err, saved) => {
                 err ? 
