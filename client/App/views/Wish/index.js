@@ -41,8 +41,8 @@ export default class Wish extends PureComponent {
                                 {nextText && <TypingText text={` которое ${call ? 'Вы' : 'ты'} предал${call ? 'и' : ''}?`}/>}
                             </div>
                             <div className="yesno col-12 row">
-                                <div className="item" onClick={this.answer('да')}>Да</div>
-                                <div className="item" onClick={this.answer('нет')}>Нет</div>
+                                <div className="item" onClick={this.answer('Да')}>Да</div>
+                                <div className="item" onClick={this.answer('Нет')}>Нет</div>
                             </div>
                         </div>
                     </div>

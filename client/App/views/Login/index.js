@@ -27,17 +27,23 @@ class Login extends PureComponent{
     input = event => {
         const { value } = event.target
 
-        if (value.length <= 6)
+        if (value.length <= 5)
             this.setState({ key: value, error: false })
 
-        if (value === 'admin')
+        if (value === 'admin' && process.env.env === 'development')
             goToView(1)
-        else if (value.length === 6)
+        else if (value.length === 5)
             axios.get(`/api/users/${value}`).then(
                 res => {
-                    console.log(res)
                     if (res.data.user) {
-                        this.props.setUserToStore(res.data.user)
+                        const { user } = res.data
+                        const [firstDate] = user.dates ? user.dates : []
+                        const currentDate = Date.now()
+
+                        this.props.setUserToStore({
+                            ...res.data.user,
+                            dates: [firstDate ? firstDate : currentDate, currentDate]
+                        })
                         goToView(1)
                     } else this.setState({ error: true })
 

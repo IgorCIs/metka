@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from 'redux'
+import axios from 'axios'
 import { user, progress, history } from './reducers'
 import { pushToHistory, setPropgress, updateUser } from './actions'
 
@@ -8,15 +9,36 @@ const storeFactory = initialState => createStore(combineReducers({
     history
 }), initialState)
 
-const store = storeFactory(
-    localStorage['metka-store'] ?
-        JSON.parse(localStorage['metka-store']) :
-        {}
-)
+const initialStateFn = () => {
+    if (localStorage['metka-store']) {
+        const initialState = JSON.parse(localStorage['metka-store'])
+        const currentDate = Date.now()
+        const [ firstDate ] = initialState.user && initialState.user.dates ? initialState.user.dates : []
+
+        return {
+            ...initialState,
+            user: {
+                ...(initialState.user ? initialState.user : {}),
+                dates: [firstDate ? firstDate : currentDate, currentDate]
+            }
+        }
+    }
+
+    return {}
+}
+
+const store = storeFactory(initialStateFn())
 
 store.subscribe(() => {
-    console.log(store.getState())
+    if (process.env.env === 'development') console.log(store.getState())
+
     localStorage['metka-store'] = JSON.stringify(store.getState())
+})
+
+store.subscribe(() => {
+    const { user } = store.getState()
+
+    user._id && axios.post(`api/users/${user._id}`, user)
 })
 
 export const goToView = index => store.dispatch(pushToHistory(index))

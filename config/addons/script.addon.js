@@ -3,7 +3,7 @@ module.exports = ({ side }) => ({
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: /(node_modules|\.worker)/,
                 use: side === 'client' ? [
                     'babel-loader',
                     'eslint-loader'

@@ -79,12 +79,14 @@ class Form extends Component{
                             <label><span className="text-danger">*</span>Обращение:</label>
                             <select
                                 name="call"
-                                value={'' + call}
+                                value={call}
                                 required
                                 onChange={this.inputChange('call')}
-                                className="form-control">
-                                <option value={'true'}>Вы</option>
-                                <option value={'false'}>Ты</option>
+                                className="form-control"
+                            >
+                                <option disabled selected/>
+                                <option value={true}>Вы</option>
+                                <option value={false}>Ты</option>
                             </select>
                         </div>
 
@@ -136,12 +138,15 @@ class Form extends Component{
                         </div>
 
                         <div className="form-group">
-                            <label>Пол:</label>
+                            <label><span className="text-danger">*</span>Пол:</label>
                             <select
                                 name="gender"
                                 value={gender}
                                 onChange={this.inputChange('gender')}
-                                className="form-control">
+                                className="form-control"
+                                required
+                            >
+                                <option disabled selected/>
                                 <option value={1}>М</option>
                                 <option value={0}>Ж</option>
                             </select>

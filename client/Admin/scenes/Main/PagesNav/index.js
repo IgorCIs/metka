@@ -11,11 +11,21 @@ const arrFromLength = (length = 0, index = 0) => length > 0 ? [
 const PagesNav = ({ currentPage = 1, length = 1 }) => (
     <ul className="pagination justify-content-center">
         {arrFromLength(length, 1).map(page =>
-            <li key={page} className={`page-item${currentPage === page ? ' active' : ''}`}>
-                <Link className="page-link" to={`/admin/page/${page}`}>
-                    {page}
-                </Link>
-            </li>)
+            (page === 1 || page === length) ||
+            (page < currentPage + 2 && page > currentPage - 2) ?
+                <li key={page} className={`page-item${currentPage === page ? ' active' : ''}`}>
+                    <Link className="page-link" to={`/admin/page/${page}`}>
+                        {page}
+                    </Link>
+                </li>
+                : (page === currentPage + 2 || page === currentPage - 2) ?
+                    <li key={page} className="page-item">
+                        <Link className="page-link" to={`/admin/page/${page}`}>
+                            ...
+                        </Link>
+                    </li>
+                    : null
+        )
         }
     </ul>
 )
