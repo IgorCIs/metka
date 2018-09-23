@@ -18,6 +18,7 @@ const userSchema = new Schema({
             count: { type: 'Number' }
         }
     },
+    callbackMessage: { type: String },
     __v: { type: 'Number', select: false }
 })
 
