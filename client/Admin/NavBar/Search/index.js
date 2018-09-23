@@ -29,6 +29,8 @@ class Search extends PureComponent {
         }, 1000)
     }
 
+    onSubmit = event => event.preventDefault()
+
     componentDidMount() {
         clearTimeout(this.timeout)
     }
@@ -37,7 +39,7 @@ class Search extends PureComponent {
         const { value } = this.state
 
         return (
-            <form className="form-inline my-2 my-lg-0">
+            <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
                 <input
                     className="form-control mr-sm-2"
                     type="search"

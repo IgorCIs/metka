@@ -66,4 +66,13 @@ export const setTest = (name, value) => {
 
 export const getTest = name => store.getState().user.tests[name].answer
 
+export const setProgressType = type => {
+    const { user } = store.getState()
+
+    store.dispatch(updateUser({
+        ...user,
+        progressType: type
+    }))
+}
+
 export default store
