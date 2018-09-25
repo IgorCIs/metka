@@ -97,7 +97,7 @@ class Table extends PureComponent {
                     </tbody>
                 </table>
 
-                {loading && user.length > 500 && <div
+                {loading && users.length > 500 && <div
                     className="position-fixed"
                     style={{
                         top: '0',

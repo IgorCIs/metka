@@ -42,7 +42,10 @@ if (process.env.env === 'development' && process.env.side === 'client') {
     require('./serverSSR').default(app)    
 }
 
-// process.env.env === 'development' && require('./util/dummyData').default()
+import generate from './util/generatekeys'
+
+process.env.DUMMY_DATA && require('./util/dummyData').default()
+generate()
 
 //api
 app.use('/api', usersRoutes)
@@ -59,6 +62,3 @@ mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
 
 app.listen(config.port, '0.0.0.0')  
 
-import generate from './util/generatekeys'
-
-generate()

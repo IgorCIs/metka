@@ -17,7 +17,7 @@ export default class Happiness extends PureComponent {
     click = value => () => {
         setTest('Happiness', value)
         if (value <= 8) goToView(7)
-        else if (getTest('Wish') === 'да') {
+        else if (getTest('Wish') === 'Да') {
             this.setState({error: true})
             setTimeout(() => {
                 goToView(5)

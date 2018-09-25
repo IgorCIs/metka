@@ -32,5 +32,5 @@ if (process.env.side === 'client' && process.env.env === 'development') {
         users: window.__INITIAL_STATE__.users || [],
         count: 30,
         sort: {key: 'fullname', sign: '+'},
-        search: ''
+        search: '',
     }))

@@ -50,12 +50,15 @@ class BadFinal extends PureComponent {
         const { showPhone, telValue } = this.state
         const { user } = this.props
 
+        console.log(user.gender)
+
         return (
             <Layout type="light" className="w-100 last_slide">
                 <div className="container">
                     <div className="row">
                         <div className="col-6">
-                            <div className="video"/>
+                            <div className="video"> 
+                            </div>
                             <div className="text">
                                 {user.comment ? user.comment : <br/>}
                             </div>
