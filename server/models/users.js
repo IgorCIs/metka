@@ -15,7 +15,8 @@ const userSchema = new Schema({
     tests: {
         type: {
             answer: { type: 'String' },
-            count: { type: 'Number' }
+            count: { type: 'Number' },
+            time: { type: 'Number'}
         }
     },
     callbackMessage: { type: 'String' },
