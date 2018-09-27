@@ -5,7 +5,6 @@ import testsRoutes from './routes/tests.routes'
 import Express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 const MongoStore = require('connect-mongo')(session)
@@ -24,7 +23,6 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
-
 
 import autorizeMiddleware from './middleware/authorize.middleware'
 
@@ -47,10 +45,13 @@ import generate from './util/generatekeys'
 process.env.DUMMY_DATA && require('./util/dummyData').default()
 generate()
 
+import apiMiddleware from './middleware/api.middleware';
+
+
 //api
-app.use('/api', usersRoutes)
-app.use('/api', adminsRoutes)
-app.use('/api', testsRoutes)
+app.use('/api', apiMiddleware(config.apikey), usersRoutes)
+app.use('/api', apiMiddleware(config.apikey), adminsRoutes)
+app.use('/api', apiMiddleware(config.apikey), testsRoutes)
 
 mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
     if (error) {

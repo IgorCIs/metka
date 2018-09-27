@@ -3,6 +3,10 @@ import { render } from 'react-dom'
 import Login from './Login'
 import axios from 'axios'
 
+import axiosSetDefault from '../util/deaultAxios'
+
+axiosSetDefault(axios, window.__KEY__)
+
 import 'bootstrap/scss/bootstrap.scss'
 
 axios.get('/api/admins/isloged').then(

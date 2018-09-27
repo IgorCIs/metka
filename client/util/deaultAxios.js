@@ -1,0 +1,1 @@
+export default (axios, key) => axios.defaults.headers.common['X-Api-Key'] = key 

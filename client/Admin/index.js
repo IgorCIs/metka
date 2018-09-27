@@ -6,6 +6,10 @@ import storeFactory from '../store'
 import axios from 'axios'
 import { BrowserRouter as Router } from 'react-router-dom'
 import 'bootstrap/scss/bootstrap.scss'
+    
+import axiosSetDefault from '../util/deaultAxios'
+
+axiosSetDefault(axios, window.__KEY__)
 
 const renderWithStore = store => render(
     <Provider store={store}>
@@ -15,6 +19,7 @@ const renderWithStore = store => render(
     </Provider>,
     document.getElementById('root')
 )
+
 
 if (process.env.side === 'client' && process.env.env === 'development') {
     axios.get('/api/users').then(res => {

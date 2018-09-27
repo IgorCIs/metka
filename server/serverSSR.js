@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 import storeFactory from '../client/store'
 import { StaticRouter } from 'react-router-dom'
 import Login from './ssr/login'
+import config from './config';
 
 const middleware = app => {
     app.use(Express.static(path.resolve(__dirname, '../dist/client')))
@@ -21,8 +22,10 @@ const middleware = app => {
                     <div className="loader"> </div>
                 </div>),
             [manifest['vendor.css'], manifest['app.css']],
-            [manifest['vendor.js'], manifest['app.js']]
+            [manifest['vendor.js'], manifest['app.js']],
+            JSON.stringify(config.apikey)            
         ))
+        
     })
 
 
@@ -37,7 +40,8 @@ const middleware = app => {
             ),
             [manifest['vendor.css'], manifest['admin.css']],
             [manifest['vendor.js'], manifest['admin.js']],
-            JSON.stringify(initialState)
+            JSON.stringify(config.apikey),
+            JSON.stringify(initialState),
         ))
     }))
 
@@ -48,7 +52,8 @@ const middleware = app => {
                 <Login/>
             ),
             [manifest['vendor.css']],
-            [manifest['vendor.js'], manifest['login.js']]
+            [manifest['vendor.js'], manifest['login.js']],
+            JSON.stringify(config.apikey)
         ))
     )    
 }
