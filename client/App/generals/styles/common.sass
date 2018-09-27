@@ -271,6 +271,9 @@ input[type=number]
                 background: $gradientRight
                 cursor: pointer
 
+        +media($media-sm)
+            pointer-events: none
+
 .trymore
     position: absolute
     bottom: 20%
@@ -368,7 +371,7 @@ input[type=number]
         
 .telnum
     +media($media-sm)
-        font-size: 35px
+        font-size: 33   px
     
 
 .icon
@@ -551,23 +554,20 @@ input[type=number]
 .last_slide
     overflow: auto
     max-height: 100%
+    padding-bottom: 60px
     .slide
         color: $black
 
     .text
         font-size: 18px;
         margin-top: 30px
+        text-align: center
         +media($media-xlg)
             font-size: 28px;
 
     .video  
-        width: 100%    
-        height: 374px;
-
-        +media($media-xlg)
-            height: unset
-            video
-                max-width: 100%
+        video
+            max-width: 100%
 
     .messengers
         font-size: 24px;
@@ -584,14 +584,11 @@ input[type=number]
         margin-top: 60px
         padding: 0 100px
 
-        &_title
-            font-size: 24px;
-            text-align: center
-            margin-bottom: 20px
-
         &_input
             border: 1px solid #202020;
             position: relative
+            max-width: 600px
+            margin: 0 auto
             input
                 border: unset
             
@@ -717,155 +714,6 @@ $time: 5s;
     width: 300px
     margin: 0 auto
     background: url('./common-images/loader.gif')
-
-.container_coin 
-    height: 260px;
-    width: 260px;
-    position: absolute;
-    top: 50%;
-    margin-top: -80px;
-
-
-.coin 
-    height: 260px;
-    width: 260px;
-    position: absolute;
-    transform-style: preserve-3d;
-    transform-origin: 50%;
-    animation: spin $time infinite;
-    animation-timing-function: linear;
-
-
-
-.coin .front,
-.coin .back 
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    height: 260px;
-    width: 260px;
-    border-radius: 50%;
-    background-size: cover;
-
-
-
-.coin .front 
-    transform: translateZ(8px);
-
-
-.coin .back 
-    transform: translateZ(-8px) rotateY(180deg);
-
-
-.coin .side 
-    transform: translateX(116px);
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    
-
-
-.coin .side .circle 
-    height: 260px;
-    width: 26px;
-    position: absolute;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-
-
-.coin .side .circle:before,
-.coin .side .circle:after 
-    content: '';
-    display: block;
-    height: 25.682742452729697px;
-    width: 26px;
-    position: absolute;
-    transform: rotateX(84.375deg);
-    background: #181a19
-
-
-.coin .side .circle:before 
-    transform-origin: top center;
-
-
-.coin .side .circle:after 
-    bottom: 0;
-    transform-origin: center bottom;
-
-
-.coin .side .circle:nth-child(16) 
-    transform: rotateY(90deg) rotateX(180deg);
-
-
-.coin .side .circle:nth-child(15) 
-    transform: rotateY(90deg) rotateX(168.75deg);
-
-
-.coin .side .circle:nth-child(14) 
-    transform: rotateY(90deg) rotateX(157.5deg);
-
-
-.coin .side .circle:nth-child(13) 
-    transform: rotateY(90deg) rotateX(146.25deg);
-
-
-.coin .side .circle:nth-child(12) 
-    transform: rotateY(90deg) rotateX(135deg);
-
-
-.coin .side .circle:nth-child(11) 
-    transform: rotateY(90deg) rotateX(123.75deg);
-
-
-.coin .side .circle:nth-child(10) 
-    transform: rotateY(90deg) rotateX(112.5deg);
-
-
-.coin .side .circle:nth-child(9) 
-    transform: rotateY(90deg) rotateX(101.25deg);
-
-
-.coin .side .circle:nth-child(8) 
-    transform: rotateY(90deg) rotateX(90deg);
-
-
-.coin .side .circle:nth-child(7) 
-    transform: rotateY(90deg) rotateX(78.75deg);
-
-
-.coin .side .circle:nth-child(6) 
-    transform: rotateY(90deg) rotateX(67.5deg);
-
-
-.coin .side .circle:nth-child(5) 
-    transform: rotateY(90deg) rotateX(56.25deg);
-
-
-.coin .side .circle:nth-child(4) 
-    transform: rotateY(90deg) rotateX(45deg);
-
-
-.coin .side .circle:nth-child(3) 
-    transform: rotateY(90deg) rotateX(33.75deg);
-
-
-.coin .side .circle:nth-child(2) 
-    transform: rotateY(90deg) rotateX(22.5deg);
-
-
-.coin .side .circle:nth-child(1) 
-    transform: rotateY(90deg) rotateX(11.25deg);
-
-
-.coin .front 
-    background-image: url('./common-images/back.png');
-    background-size: contain
-
-
-.coin .back 
-    background-image: url('./common-images/front.png');
-    background-size: contain
 
 .happy
     z-index: 10

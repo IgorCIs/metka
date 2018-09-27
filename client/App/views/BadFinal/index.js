@@ -52,9 +52,9 @@ class BadFinal extends PureComponent {
 
         return (
             <Layout type="light" className="w-100 last_slide">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row">
-                        <div className="col-6">
+                        <div className="col-12">
                             <div className="video"> 
                                 <video autoPlay style={{width: 100 + '%'}}>
                                     <source src={require(user.gender ? '../../generals/male.mp4' : '../../generals/female.mp4')}/>
@@ -64,30 +64,31 @@ class BadFinal extends PureComponent {
                                 {user.comment ? user.comment : <br/>}
                             </div>
                         </div>
-                        <div className="col-6">
-                            <div className="title">Набери{user.call ? 'те' : ''} меня:</div>
-                            {!showPhone && <div 
-                                className="title gradient-text telnum"
-                                onClick={this.showPhoneHandle}
-                                style={{cursor: 'pointer'}}>
-                                    +3809x xxx xxxx
-                            </div>}
-                            {showPhone && <div className="title">
-                                <a href='tel:+38096 666 6666' className='gradient-text telnum'> +38096 666 6666 </a>
-                            </div>}
-                            {!showPhone && <div className="show" onClick={this.showPhoneHandle}>показать</div>}
-                            <div className="messengers">{'Viber/Telegram/WhatsApp'}</div>
-                            <div className="timing">
-                                <div className="timing_title">либо я наберу {user.call ? 'вас' : 'тебя'} в удобное время</div>
-                                <div className="timing_input">
-                                    <input
-                                        className="timing_tel"
-                                        type="text"
-                                        placeholder="Введите номер"
-                                        value={telValue}
-                                        onChange={this.handleChangeTel}
-                                    />
-                                    <div className="timing_diap">c <input type="text" value="11" /> до <input type="text" value="18" /></div>
+                        <div className="col-12">
+                            <div className="container">
+                                <div className="title">Набери{user.call ? 'те' : ''} меня:</div>
+                                {!showPhone && <div 
+                                    className="title gradient-text telnum"
+                                    onClick={this.showPhoneHandle}
+                                    style={{cursor: 'pointer'}}>
+                                        +3806x xxx xxxx
+                                </div>}
+                                {showPhone && <div className="title">
+                                    <a href='tel:+38067 659 32 02' className='gradient-text telnum'> +38067 659 3202 </a>
+                                </div>}
+                                {!showPhone && <div className="show" onClick={this.showPhoneHandle}>показать</div>}
+                                <div className="messengers">{'Viber/Telegram/WhatsApp'}</div>
+                                <div className="timing">
+                                    <div className="timing_input">
+                                        <input
+                                            className="timing_tel"
+                                            type="text"
+                                            placeholder="Введите номер"
+                                            value={telValue}
+                                            onChange={this.handleChangeTel}
+                                        />
+                                        <div className="timing_diap">c <input type="text" value="11" /> до <input type="text" value="18" /></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

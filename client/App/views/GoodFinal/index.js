@@ -54,11 +54,11 @@ export default class GoodFinal extends PureComponent {
                                 className="title title_small telnum"
                                 onClick={this.showPhoneHandle} 
                                 style={{cursor: 'pointer'}}>
-                                    +3809х ххх хххх
+                                    +3806х ххх хххх
                             </div>}
                             {showPhone && <div className="title title_small telnum">
-                                <a href='tel: +380966 666 6666'>
-                                    +38096 666 6666 
+                                <a href='tel: +38067 659 32 02'>
+                                    +38067 659 3202
                                 </a>
                             </div>}
                             {!showPhone && <div
