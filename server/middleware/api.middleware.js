@@ -1,10 +1,7 @@
-// export default key => (req, res, next) => {
-// if(req.headers['x-api-key'] && req.headers['x-api-key'] != key) {
-//     next()
-// } else {
-//     res.sendStatus(403)
-// }
-// console.log(req.headers)
-// console.log(req.headers['X-Api-Key'])
-//     next()
-// }
+export default key => (req, res, next) => {
+    if(req.headers['x-api-key'] && req.headers['x-api-key'] === key) {
+        next()
+    } else {
+        res.sendStatus(403)
+    }
+}

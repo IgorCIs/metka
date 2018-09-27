@@ -1,4 +1,4 @@
-export default (html = '', styles = [], scripts = [], initialState) => `
+export default (html = '', styles = [], scripts = [], key, initialState) => `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -9,6 +9,12 @@ export default (html = '', styles = [], scripts = [], initialState) => `
         </head>
         <body>
             <div id="root">${html}</div>
+            ${key ? 
+                `<script> 
+                    window.__KEY__ = ${key}
+                </script>
+                ` : ''
+            }
             ${initialState ? `
                 <script>
                     ${initialState ? `window.__INITIAL_STATE__ = ${initialState}` : '' }
