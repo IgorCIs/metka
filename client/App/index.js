@@ -11,6 +11,8 @@ import 'bootstrap/scss/bootstrap-grid.scss'
 
 import './generals/generals.scss'
 
+import axiosSetDefault from './../util/deaultAxios'
+
 axiosSetDefault(axios, window.__KEY__)
 
 setTimeout(() => {
