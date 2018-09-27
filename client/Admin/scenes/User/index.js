@@ -12,6 +12,9 @@ const User = ({ users = [], match }) => {
             <div className="row">
                 <div className="col-8">
                     <h3 className="h3">Код: {user._id}</h3>
+                    {user.callbackMessage && <div className="alert alert-secondary">
+                        {user.callbackMessage}
+                    </div>}
                     <Form user={user}/>
                 </div>
                 <div className="col-4">

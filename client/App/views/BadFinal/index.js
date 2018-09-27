@@ -5,6 +5,37 @@ import PropTypes from 'prop-types'
 import Layout from '../../components/Layout'
 import { setPropgress, updateUser } from '../../store/actions'
 
+const monthes = index => {
+    switch(index) {
+    case 0:
+        return 'Январь'
+    case 1:
+        return 'Февраль'
+    case 2:
+        return 'Март'
+    case 3:
+        return 'Апрель'
+    case 4:
+        return 'Май'
+    case 5:
+        return 'Июнь'
+    case 6:
+        return 'Июль'
+    case 7:
+        return 'Август'
+    case 8:
+        return 'Сентябрь'
+    case 9:
+        return 'Октябрь'
+    case 10:
+        return 'Ноябрь'
+    case 11:
+        return 'Декабрь'
+    default:
+        return 'Январь'
+    }
+}
+
 class BadFinal extends PureComponent {
     constructor(props, context) {
         super(props, context)
@@ -14,32 +45,46 @@ class BadFinal extends PureComponent {
         user: PropTypes.object,
         progressFull: PropTypes.func,
         progressType: PropTypes.func,
-        telForUser: PropTypes.func
+        sending: PropTypes.func
     }
 
     state = {
         showPhone: false,
-        telValue: ''
+        telValue: '',
+        day: ((new Date).getDate() + 1) % 31 || 31,
+        month: (new Date).getMonth(),
+        from: 11,
+        to: 18,
+        send: false,
     }
 
-    timeout = null
-    indexed = false
+    generateMsg = () => {
+        const { day, month, from, to } = this.state
+
+        return `Перезвонить ${day} ${monthes(month)} c ${from}:00 до ${to}:00`
+    }
+
+    handleChange = key => event => {
+        this.setState({[key]: event.target.value})
+    }
+
+    submit = event => {
+        event.preventDefault()
+
+        this.setState({send: true})
+
+        this.props.sending(this.props.user, {
+            callbackMessage: this.generateMsg(),
+            tels:
+                this.props.user.tels.indexOf(this.state.telValue) !== -1 ||
+                !this.state.telValue ? this.props.user.tels :
+                    [this.state.telValue, ...this.props.user.tels]
+        })
+    }
 
     componentDidMount() {
         this.props.progressFull()
         this.props.progressType(this.props.user)
-    }
-
-    handleChangeTel = event => {
-        clearTimeout(this.timeout)
-
-        this.setState({telValue: event.target.value})
-
-        this.timeout = setTimeout(() => {
-            console.log(this.indexed)
-            this.props.telForUser(this.props.user, this.state.telValue, this.indexed)
-            this.indexed = true
-        }, 1000)
     }
 
     showPhoneHandle = () => {
@@ -47,7 +92,7 @@ class BadFinal extends PureComponent {
     }
 
     render() {
-        const { showPhone, telValue } = this.state
+        const { showPhone, telValue, from, to, day, month, send } = this.state
         const { user } = this.props
 
         return (
@@ -78,6 +123,26 @@ class BadFinal extends PureComponent {
                                 </div>}
                                 {!showPhone && <div className="show" onClick={this.showPhoneHandle}>показать</div>}
                                 <div className="messengers">{'Viber/Telegram/WhatsApp'}</div>
+                                <div className="messengers">Выбери{user.call ? 'те' : ''} дату</div>
+                                <div className="input-dates">
+                                    <select
+                                        value={day}
+                                        onChange={this.handleChange('day')}
+                                    >
+                                        {[...new Array(31).keys()].map(value => (
+                                            <option key={value + 1} value={value + 1}>{value + 1}</option>
+                                        ))}
+                                    </select>
+
+                                    <select
+                                        value={month}
+                                        onChange={this.handleChange('month')}
+                                    >
+                                        {[...new Array(12).keys()].map(value => (
+                                            <option key={value} value={value}>{monthes(value)}</option>
+                                        ))}
+                                    </select>
+                                </div>
                                 <div className="timing">
                                     <div className="timing_input">
                                         <input
@@ -85,11 +150,34 @@ class BadFinal extends PureComponent {
                                             type="text"
                                             placeholder="Введите номер"
                                             value={telValue}
-                                            onChange={this.handleChangeTel}
+                                            onChange={this.handleChange('telValue')}
                                         />
-                                        <div className="timing_diap">c <input type="text" value="11" /> до <input type="text" value="18" /></div>
+                                        <div className="timing_diap">
+                                            c <select
+                                                value={from}
+                                                onChange={this.handleChange('from')}
+                                            >
+                                                {[...new Array(23).keys()].map(value => (
+                                                    <option key={value} value={value}>{value}</option>
+                                                ))}
+                                            </select>
+                                            {' '}до <select
+                                                value={to}
+                                                onChange={this.handleChange('to')}
+                                            >
+                                                {[...new Array(23).keys()].map(value => (
+                                                    <option key={value} value={value}>{value}</option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <button onClick={this.submit}>Отправить</button>
+
+                                {send && <div>
+                                    Complete
+                                </div>}
                             </div>
                         </div>
                     </div>
@@ -113,14 +201,13 @@ const mapDispatchToProps = dispatch => ({
             progressType: true
         }))
     },
-    telForUser(user, tel, indexed) {
-        const { tels = [] } = user
-        const [, ...otherTels] = tels
-
-        dispatch(updateUser({
-            ...user,
-            tels: !indexed ? [tel, ...tels] : [tel, ...otherTels]
-        }))
+    sending(user, data) {
+        dispatch(
+            updateUser({
+                ...user,
+                ...data
+            })
+        )
     }
 })
 
