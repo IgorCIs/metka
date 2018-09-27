@@ -14,13 +14,13 @@ import NoAnswer from './NoAnswer'
 
 export default [
     <Login key={0}/>,
-    <Changes key={1}/>,
-    <Numbers key={2}/>,
-    <Stupid key={3}/>,
+    <Changes key={1} testName="Changes"/>,
+    <Numbers key={2} testName="Numbers"/>,
+    <Stupid key={3} testName="Stupid"/>,
     <HappyEnd key={4}/>,
-    <Wish key={5}/>,
-    <Happiness key={6}/>,
-    <Obstacles key={7}/>,
+    <Wish key={5} testName="Wish"/>,
+    <Happiness key={6} testName="Happiness"/>,
+    <Obstacles key={7} testName="Obstacles"/>,
     <GoodFinal key={8}/>,
     <BadFinal key={9}/>,
     <NoAnswer key={10}/>

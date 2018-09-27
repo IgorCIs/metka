@@ -4,8 +4,9 @@ import { reloadProgress, getUserCall, goToView, setTest } from '../../store'
 import Layout from '../../components/Layout'
 import TypingText from '../../components/TypingText'
 import Door from '../../components/Door'
+import testTime from '../../components/testTime'
 
-export default class Wish extends PureComponent {
+class Wish extends PureComponent {
     constructor(props, context) {
         super(props, context)
     }
@@ -52,3 +53,5 @@ export default class Wish extends PureComponent {
         )
     }
 }
+
+export default testTime(Wish)

@@ -3,8 +3,9 @@ import React, { PureComponent, Fragment } from 'react'
 import Layout from '../../components/Layout'
 import TypingText from '../../components/TypingText'
 import { getUserCall, reloadProgress, goToView, getTest, setTest } from '../../store'
+import testTime from '../../components/testTime'
 
-export default class Happiness extends PureComponent {
+class Happiness extends PureComponent {
     constructor(props, context) {
         super(props, context)
     }
@@ -71,3 +72,5 @@ export default class Happiness extends PureComponent {
         )
     }
 }
+
+export default testTime(Happiness)

@@ -3,8 +3,9 @@ import React, { PureComponent } from 'react'
 import TypingText from '../../components/TypingText'
 import Layout from '../../components/Layout'
 import { reloadProgress, getUserCall, goToView, setTest } from '../../store'
+import testTime from '../../components/testTime'
 
-export default class Changes extends PureComponent {
+class Changes extends PureComponent {
     constructor(props, context) {
         super(props, context)
     }
@@ -37,3 +38,5 @@ export default class Changes extends PureComponent {
         )
     }
 }
+
+export default testTime(Changes)

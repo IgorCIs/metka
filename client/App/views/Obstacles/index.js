@@ -4,8 +4,9 @@ import Layout from '../../components/Layout'
 import { setTest, goToView, reloadProgress, getUserCall } from '../../store'
 import Door from '../../components/Door'
 import TypingText from '../../components/TypingText'
+import testTime from '../../components/testTime'
 
-export default class Obstacles extends PureComponent {
+class Obstacles extends PureComponent {
     constructor(props, context) {
         super(props, context)
     }
@@ -49,3 +50,5 @@ export default class Obstacles extends PureComponent {
         )
     }
 }
+
+export default testTime(Obstacles)

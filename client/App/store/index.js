@@ -47,7 +47,7 @@ export const reloadProgress = progress => store.dispatch(setPropgress(progress))
 
 export const getUserCall = () => store.getState().user.call
 
-export const setTest = (name, value) => {
+export const setTest = (name, value, key = 'answer') => {
     const { user } = store.getState()
 
     store.dispatch(updateUser({
@@ -55,10 +55,12 @@ export const setTest = (name, value) => {
         tests: {
             ...user.tests,
             [name]: {
-                answer: value,
+                ...(user.tests && user.tests[name] ? user.tests[name] : {}),
+                [key]: key === 'answer' ? value : value + user.tests[name][key],
                 count: !user.tests || !user.tests[name] ? 1 :
-                    user.tests[name].count === undefined ?
-                        1 : user.tests[name].count + 1
+                    user.tests[name].count === undefined ? 1 :
+                        key === 'answer' ? user.tests[name].count + 1 :
+                            user.tests[name].count
             }
         }
     }))

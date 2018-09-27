@@ -3,10 +3,11 @@ import React, { PureComponent, Fragment } from 'react'
 import TypingText from '../../components/TypingText'
 import Layout from '../../components/Layout'
 import { reloadProgress, getUserCall, goToView, setTest } from '../../store'
+import testTime from '../../components/testTime'
 
 import animStyles from '../../components/AnimMounting/AnimWrapper.scss'
 
-export default class Numbers extends PureComponent {
+class Numbers extends PureComponent {
     constructor(props, context) {
         super(props, context)
     }
@@ -83,3 +84,5 @@ export default class Numbers extends PureComponent {
         )
     }
 }
+
+export default testTime(Numbers)
