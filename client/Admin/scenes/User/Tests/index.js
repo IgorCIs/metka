@@ -33,7 +33,7 @@ const Tests = ({ tests = {} }) => {
                     Тест {key}: {tests[key].answer + ' '}
                     <span className="badge badge-primary">{tests[key].count}</span>
                     {' '}
-                    <span className="badge badge-secondary">{localTime(tests[key].time)}</span>
+                    {tests[key].time && <span className="badge badge-secondary">{localTime(tests[key].time)}</span>}
                 </li>
             ))}
         </ul>
