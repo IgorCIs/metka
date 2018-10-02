@@ -80,8 +80,8 @@ class Table extends PureComponent {
                             <th>№</th>
                             <SortingField sortBy={'fullname'}>ФИО</SortingField>
                             <SortingField sortBy={'_id'}>Код</SortingField>
-                            <th>Вход</th>
-                            <th>Тип</th>
+                            <SortingField sortBy={'enter'}>Вход</SortingField>
+                            <SortingField sortBy={'type'}>Тип</SortingField>
                             <SortingField sortBy={'dates.0'}>Дата захода</SortingField>
                             <SortingField sortBy={'dates.1'}>Дата последнего захода</SortingField>
                         </tr>
