@@ -3,7 +3,7 @@ export default (html = '', styles = [], scripts = [], key, initialState) => `
         <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <title>ИЗМНЕНЕНИЯ ЗДЕСЬ</title>
+            <title>ИЗМЕНЕНИЯ ЗДЕСЬ</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             ${styles.map(styleURI => `<link rel="stylesheet" href="${styleURI}">`).join('\n')}                
         </head>

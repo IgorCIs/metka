@@ -8,31 +8,31 @@ import { setPropgress, updateUser } from '../../store/actions'
 const monthes = index => {
     switch(index) {
     case 0:
-        return 'Январь'
+        return 'января'
     case 1:
-        return 'Февраль'
+        return 'февраля'
     case 2:
-        return 'Март'
+        return 'марта'
     case 3:
-        return 'Апрель'
+        return 'апреля'
     case 4:
-        return 'Май'
+        return 'мая'
     case 5:
-        return 'Июнь'
+        return 'июня'
     case 6:
-        return 'Июль'
+        return 'июля'
     case 7:
-        return 'Август'
+        return 'августа'
     case 8:
-        return 'Сентябрь'
+        return 'сентября'
     case 9:
-        return 'Октябрь'
+        return 'октября'
     case 10:
-        return 'Ноябрь'
+        return 'ноября'
     case 11:
-        return 'Декабрь'
+        return 'декабря'
     default:
-        return 'Январь'
+        return 'января'
     }
 }
 
@@ -100,9 +100,9 @@ class BadFinal extends PureComponent {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-12">
-                            <div className="video"> 
+                            <div className="video" onEnded={()=> window.location = '#end'}> 
                                 <video autoPlay style={{width: 100 + '%'}}>
-                                    <source src={require(user.gender ? '../../generals/male.mp4' : '../../generals/female.mp4')}/>
+                                    <source src={require(user.gender === undefined || user.gender === 1 ? '../../generals/male.mp4' : '../../generals/female.mp4')}/>
                                 </video>
                             </div>
                             <div className="text">
@@ -111,19 +111,17 @@ class BadFinal extends PureComponent {
                         </div>
                         <div className="col-12">
                             <div className="container">
-                                <div className="title">Набери{user.call ? 'те' : ''} меня:</div>
                                 {!showPhone && <div 
                                     className="title gradient-text telnum"
                                     onClick={this.showPhoneHandle}
                                     style={{cursor: 'pointer'}}>
-                                        +3806x xxx xxxx
+                                        +3806x xxx xxxx     
                                 </div>}
                                 {showPhone && <div className="title">
                                     <a href='tel:+38067 659 32 02' className='gradient-text telnum'> +38067 659 3202 </a>
                                 </div>}
                                 {!showPhone && <div className="show" onClick={this.showPhoneHandle}>показать</div>}
-                                <div className="messengers">{'Viber/Telegram/WhatsApp'}</div>
-                                <div className="messengers">Выбери{user.call ? 'те' : ''} дату</div>
+                                <div className="messengers" id='end'>Выбери{user.call ? 'те' : ''} дату звонка</div>
                                 <div className="input-dates">
                                     <select
                                         value={day}
@@ -137,6 +135,7 @@ class BadFinal extends PureComponent {
                                     <select
                                         value={month}
                                         onChange={this.handleChange('month')}
+                                        className='monthselect'
                                     >
                                         {[...new Array(12).keys()].map(value => (
                                             <option key={value} value={value}>{monthes(value)}</option>
@@ -148,7 +147,7 @@ class BadFinal extends PureComponent {
                                         <input
                                             className="timing_tel"
                                             type="text"
-                                            placeholder="Введите номер"
+                                            placeholder="Введите номер телефона"
                                             value={telValue}
                                             onChange={this.handleChange('telValue')}
                                         />
@@ -173,10 +172,12 @@ class BadFinal extends PureComponent {
                                     </div>
                                 </div>
 
-                                <button onClick={this.submit}>Отправить</button>
+                                {!send &&
+                                    <button className='buttonSubmit' onClick={this.submit}>отправить</button>
+                                }
 
-                                {send && <div>
-                                    Complete
+                                {send && <div className='sended'>
+                                    Спасибо, до встречи!
                                 </div>}
                             </div>
                         </div>

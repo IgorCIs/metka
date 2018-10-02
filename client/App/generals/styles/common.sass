@@ -591,7 +591,12 @@ input[type=number]
             max-width: 600px
             margin: 0 auto
             input
+                font-size: 20px
                 border: unset
+
+                +media($media-sm)
+                    font-size: 16px    
+                    padding-left: 20px
             
         &_tel   
             padding: 40px 0 40px 40px
@@ -620,13 +625,16 @@ input[type=number]
                 transform: translateY(-50%)
 
 
-            input
+            select
                 border-right: unset
+                appearance: none
                 margin-left: 10px
                 text-align: center
                 padding: 0
                 padding-bottom: 5px
+                padding-left: 7px
                 width: 40px
+                text-align: center
                 border-left: unset
                 border-top: unset
 
@@ -685,6 +693,24 @@ input[type=number]
                 input
                     background: unset
 
+.buttonSubmit
+    margin: 0 auto
+    cursor: pointer
+    border: unset
+    margin-top: 40px
+    background: $gradientRight
+    color: white
+    font-size: 0.6em
+    padding: 15px 30px
+    max-width: 320px
+    display: block
+
+.sended
+    text-align: center
+    width: 100%
+    font-size: 0.8em
+    margin-top: 40px
+
 .happy
     width: 100%
     background: url('./common-images/happy.png')
@@ -695,7 +721,8 @@ input[type=number]
         background-size: contain
 
 
-
+.sended
+    
 
 
 
@@ -738,3 +765,16 @@ $time: 5s;
     background-position: 50% 100%
     background-repeat: no-repeat
     animation-fill-mode: forwards;
+
+.input-dates
+    display: flex
+    justify-content: center
+    align-items: center
+
+    select
+        color: #565656
+        font-size: 0.6em
+        background: unset
+        border: unset
+
+
