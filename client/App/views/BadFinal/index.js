@@ -47,10 +47,10 @@ class BadFinal extends PureComponent {
         progressType: PropTypes.func,
         sending: PropTypes.func
     }
-
+    
     state = {
         showPhone: false,
-        telValue: '',
+        telValue: '+380',
         day: ((new Date).getDate() + 1) % 31 || 31,
         month: (new Date).getMonth(),
         from: 11,
@@ -111,6 +111,7 @@ class BadFinal extends PureComponent {
                         </div>
                         <div className="col-12">
                             <div className="container">
+                                <div className='namekravec'> Алексей Кравец </div>
                                 {!showPhone && <div 
                                     className="title gradient-text telnum"
                                     onClick={this.showPhoneHandle}
@@ -149,6 +150,7 @@ class BadFinal extends PureComponent {
                                             type="text"
                                             placeholder="Введите номер телефона"
                                             value={telValue}
+                                            maxLength={13}
                                             onChange={this.handleChange('telValue')}
                                         />
                                         <div className="timing_diap">

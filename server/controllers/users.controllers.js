@@ -1,4 +1,5 @@
 import User from '../models/users'
+import { sendMail } from '../util/sendMail';
 
 export const getUsers = (req, res) => 
     new Promise(resolve => User.find().exec((err, users) => {
@@ -42,6 +43,8 @@ export const updateUser = (req, res) => {
     if(!params.id || !body)  res.status(403).end()
 
     User.findById(params.id, (err, user) => {
+        body.callbackMessage && user.callbackMessage !== body.callbackMessage && sendMail(`${body.callbackMessage} ${params.id}`)
+        
         if(err) res.status(500).send(err)
         else if(!user) res.status(500).json({message: 'No user width this id', id: req.params.id}) 
         else {
@@ -49,10 +52,11 @@ export const updateUser = (req, res) => {
             
             user.save((err, saved) => {
                 err ? 
-                    res.status(500).send(err)
-                    :
-                    res.json({ post: saved })
+                res.status(500).send(err)
+                :
+                res.json({ post: saved })
             })
         }
     })
+
 }
