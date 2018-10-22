@@ -15,12 +15,13 @@ const mailConfig = text => ({
     text
 })
 
-export const sendMail = text => {    
-    transporter.sendMail(mailConfig(text), (error, info) => {
-        if (error) {
+const mailSend = config => text => {
+    transporter.sendMail(config(text), (error, info) => {
+        if (error) 
             console.log(error)
-        } else {
-            console.log('Email sent: ' + info.response)
-        }
-    });
+        else 
+            console.log('Email sent: ' + info.response)       
+    })
 }
+
+export const sendMail = mailSend(mailConfig)

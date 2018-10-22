@@ -61,5 +61,5 @@ mongoose.connect(config.mongoURL, { useNewUrlParser: true }, (error) => {
 })
 
 
-app.listen(config.port, '0.0.0.0')  
+app.listen(config.port, '0.0.0.0')
 
